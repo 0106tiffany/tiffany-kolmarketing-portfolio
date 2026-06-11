@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>創作分析 · KOL Video Analyzer</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface-2: #18181f;
+    --border: #2a2a35;
+    --border-active: #5b5bd6;
+    --text-primary: #f0f0f5;
+    --text-secondary: #8888a8;
+    --text-muted: #55556a;
+    --accent: #5b5bd6;
+    --accent-soft: rgba(91,91,214,0.12);
+    --accent-glow: rgba(91,91,214,0.25);
+    --green: #2dd4a0;
+    --green-soft: rgba(45,212,160,0.1);
+    --amber: #f5a623;
+    --amber-soft: rgba(245,166,35,0.1);
+    --red: #f06060;
+    --red-soft: rgba(240,96,96,0.1);
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── Layout ── */
+  .app { display: flex; flex-direction: column; min-height: 100vh; }
+
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface);
+    position: sticky; top: 0; z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .logo-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent-glow);
+  }
+
+  .header-tag {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 0;
+    height: calc(100vh - 56px);
+    overflow: hidden;
+  }
+
+  /* ── Left Panel ── */
+  .panel-left {
+    border-right: 1px solid var(--border);
+    background: var(--surface);
+    overflow-y: auto;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .panel-left::-webkit-scrollbar { width: 4px; }
+  .panel-left::-webkit-scrollbar-track { background: transparent; }
+  .panel-left::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  /* ── Right Panel ── */
+  .panel-right {
+    overflow-y: auto;
+    padding: 28px 32px;
+    background: var(--bg);
+  }
+  .panel-right::-webkit-scrollbar { width: 4px; }
+  .panel-right::-webkit-scrollbar-track { background: transparent; }
+  .panel-right::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  /* ── Section Labels ── */
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  /* ── Tag Groups ── */
+  .tag-group { display: flex; flex-direction: column; gap: 8px; }
+
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+    background: var(--surface-2);
+  }
+  .tag:hover { border-color: var(--accent); color: var(--text-primary); }
+  .tag.active {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* ── Platform Icons ── */
+  .platform-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .platform-btn {
+    padding: 10px 8px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    text-align: center;
+  }
+  .platform-btn:hover { border-color: var(--accent); color: var(--text-primary); }
+  .platform-btn.active {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .platform-btn svg { width: 18px; height: 18px; }
+
+  /* ── Input ── */
+  .input-group { display: flex; flex-direction: column; gap: 8px; }
+
+  .url-input-wrap {
+    position: relative;
+  }
+
+  .url-input {
+    width: 100%;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    color: var(--text-primary);
+    font-size: 13px;
+    font-family: 'Inter', monospace;
+    transition: border-color 0.15s;
+    outline: none;
+    resize: none;
+    min-height: 80px;
+  }
+  .url-input::placeholder { color: var(--text-muted); }
+  .url-input:focus { border-color: var(--accent); }
+
+  .url-hint {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* ── Material Type ── */
+  .material-row {
+    display: flex;
+    gap: 8px;
+  }
+
+  .material-btn {
+    flex: 1;
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--text-secondary);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: center;
+  }
+  .material-btn:hover { border-color: var(--accent); color: var(--text-primary); }
+  .material-btn.active-green {
+    background: var(--green-soft);
+    border-color: var(--green);
+    color: var(--green);
+  }
+  .material-btn.active-amber {
+    background: var(--amber-soft);
+    border-color: var(--amber);
+    color: var(--amber);
+  }
+
+  /* ── Divider ── */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 4px 0;
+  }
+
+  /* ── Analyze Button ── */
+  .analyze-btn {
+    width: 100%;
+    padding: 14px;
+    background: var(--accent);
+    border: none;
+    border-radius: var(--radius);
+    color: #fff;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    letter-spacing: 0.2px;
+  }
+  .analyze-btn:hover { background: #4a4ac4; box-shadow: 0 0 20px var(--accent-glow); }
+  .analyze-btn:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+
+  .analyze-btn .spinner {
+    width: 16px; height: 16px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: none;
+  }
+  .analyze-btn.loading .spinner { display: block; }
+  .analyze-btn.loading .btn-text { opacity: 0.7; }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── API Key ── */
+  .api-key-section {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px;
+  }
+
+  .api-key-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .api-key-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 12px;
+    font-family: monospace;
+    outline: none;
+  }
+  .api-key-input::placeholder { color: var(--text-muted); }
+
+  .api-status {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    flex-shrink: 0;
+  }
+  .api-status.ok { background: var(--green); box-shadow: 0 0 6px var(--green); }
+
+  /* ── Right: Empty State ── */
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 16px;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  .empty-icon {
+    width: 64px; height: 64px;
+    border-radius: 16px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .empty-state h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .empty-state p {
+    font-size: 13px;
+    max-width: 280px;
+    line-height: 1.7;
+  }
+
+  /* ── Results ── */
+  .results-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    gap: 16px;
+  }
+
+  .results-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .results-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .results-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .result-tag {
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    border: 1px solid;
+  }
+  .result-tag.region { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+  .result-tag.platform { border-color: var(--border); color: var(--text-secondary); background: var(--surface-2); }
+  .result-tag.material-high { border-color: var(--green); color: var(--green); background: var(--green-soft); }
+  .result-tag.material-convert { border-color: var(--amber); color: var(--amber); background: var(--amber-soft); }
+
+  .copy-all-btn {
+    padding: 7px 14px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--text-secondary);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .copy-all-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── Layer Cards ── */
+  .layers { display: flex; flex-direction: column; gap: 16px; }
+
+  .layer-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .layer-header {
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .layer-header:hover { background: var(--surface-2); }
+
+  .layer-number {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .layer-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    flex: 1;
+  }
+
+  .layer-chevron {
+    color: var(--text-muted);
+    transition: transform 0.2s;
+  }
+  .layer-card.open .layer-chevron { transform: rotate(180deg); }
+
+  .layer-body {
+    display: none;
+    padding: 0 18px 18px;
+    border-top: 1px solid var(--border);
+  }
+  .layer-card.open .layer-body { display: block; }
+
+  /* ── Layer Content Styling ── */
+  .layer-content {
+    padding-top: 14px;
+    color: var(--text-secondary);
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .layer-content h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin: 14px 0 6px;
+  }
+  .layer-content h4:first-child { margin-top: 0; }
+
+  .layer-content p { margin-bottom: 8px; }
+
+  .layer-content ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .layer-content li {
+    padding-left: 14px;
+    position: relative;
+    color: var(--text-secondary);
+  }
+  .layer-content li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--text-muted);
+  }
+
+  .highlight-box {
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    margin: 10px 0;
+    font-size: 13px;
+    color: var(--text-primary);
+  }
+
+  .green-box {
+    background: var(--green-soft);
+    border: 1px solid var(--green);
+    border-left: 3px solid var(--green);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    margin: 10px 0;
+    font-size: 13px;
+    color: var(--text-primary);
+  }
+
+  .score-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 6px 0;
+  }
+  .score-label { font-size: 12px; color: var(--text-secondary); min-width: 80px; }
+  .score-bar {
+    flex: 1;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .score-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: var(--accent);
+    transition: width 0.6s ease;
+  }
+  .score-fill.green { background: var(--green); }
+  .score-fill.amber { background: var(--amber); }
+  .score-val { font-size: 12px; font-weight: 600; color: var(--text-primary); min-width: 32px; text-align: right; }
+
+  .tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .cloud-tag {
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+  .cloud-tag.hot {
+    background: rgba(240,96,96,0.1);
+    border-color: var(--red);
+    color: var(--red);
+  }
+
+  /* ── Loading skeleton ── */
+  .skeleton-results { display: flex; flex-direction: column; gap: 16px; }
+
+  .skeleton-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .skel {
+    background: linear-gradient(90deg, var(--surface-2) 25%, var(--border) 50%, var(--surface-2) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+    height: 12px;
+  }
+  .skel.h16 { height: 16px; }
+  .skel.h24 { height: 24px; }
+  .skel.w60 { width: 60%; }
+  .skel.w40 { width: 40%; }
+  .skel.w80 { width: 80%; }
+  .skel.w100 { width: 100%; }
+
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  .loading-status {
+    text-align: center;
+    padding: 16px;
+    color: var(--text-secondary);
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .loading-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 1.2s ease-in-out infinite;
+  }
+  .loading-dot:nth-child(2) { animation-delay: 0.2s; }
+  .loading-dot:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes pulse {
+    0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+    40% { opacity: 1; transform: scale(1); }
+  }
+
+  /* ── Error ── */
+  .error-box {
+    background: var(--red-soft);
+    border: 1px solid var(--red);
+    border-radius: var(--radius);
+    padding: 16px;
+    color: var(--red);
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  /* ── History ── */
+  .history-list { display: flex; flex-direction: column; gap: 6px; }
+
+  .history-item {
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .history-item:hover { border-color: var(--accent); }
+
+  .history-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .history-url {
+    font-size: 12px;
+    color: var(--text-secondary);
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .history-time {
+    font-size: 11px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 800px) {
+    main { grid-template-columns: 1fr; height: auto; }
+    .panel-left { border-right: none; border-bottom: 1px solid var(--border); }
+    .panel-right { min-height: 60vh; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <div class="logo-dot"></div>
+      創作分析
+    </div>
+    <div class="header-tag">3D AI · KOL Video Analyzer · MVP v0.1 · KB v1.0</div>
+  </header>
+
+  <main>
+    <!-- ── Left Panel ── -->
+    <div class="panel-left">
+
+      <!-- API Key -->
+      <div>
+        <div class="section-label">Anthropic API Key</div>
+        <div class="api-key-section">
+          <div class="api-key-row">
+            <div class="api-status" id="apiStatus"></div>
+            <input class="api-key-input" type="password" id="apiKeyInput"
+              placeholder="sk-ant-..." autocomplete="off" />
+          </div>
+        </div>
+        <div class="url-hint" style="margin-top:6px;">Key 僅存於本地，不會上傳。</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Region -->
+      <div class="tag-group">
+        <div class="section-label">語區</div>
+        <div class="tag-row" id="regionTags">
+          <div class="tag active" data-val="EN">EN</div>
+          <div class="tag" data-val="JP">JP</div>
+          <div class="tag" data-val="KR">KR</div>
+          <div class="tag" data-val="FR">FR</div>
+          <div class="tag" data-val="ES">ES</div>
+        </div>
+      </div>
+
+      <!-- Platform -->
+      <div class="tag-group">
+        <div class="section-label">平台</div>
+        <div class="platform-grid" id="platformBtns">
+          <div class="platform-btn active" data-val="YouTube Long">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+            YT Long
+          </div>
+          <div class="platform-btn" data-val="YouTube Shorts">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+            YT Shorts
+          </div>
+          <div class="platform-btn" data-val="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8 0 3.2 0 3.6-.1 4.8-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12c0-3.2 0-3.6.1-4.8C2.4 3.9 4 2.3 7.2 2.3c1.2-.1 1.6-.1 4.8-.1zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1 0 8.3 0 8.7 0 12c0 3.3 0 3.7.1 4.9.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24c3.3 0 3.7 0 4.9-.1 4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9 0-3.3 0-3.7-.1-4.9-.2-4.4-2.6-6.8-7-7C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg>
+            Instagram
+          </div>
+          <div class="platform-btn" data-val="TikTok">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 3.3A4.6 4.6 0 0 1 15 0h-3.3v16.4a2.8 2.8 0 0 1-2.8 2.5 2.8 2.8 0 0 1-2.8-2.8 2.8 2.8 0 0 1 2.8-2.8c.3 0 .5 0 .8.1V9.9a6.1 6.1 0 0 0-.8-.1A6.1 6.1 0 0 0 2.8 16a6.1 6.1 0 0 0 6.1 6.1A6.1 6.1 0 0 0 15 16V8.1a7.9 7.9 0 0 0 4.6 1.5V6.3a4.6 4.6 0 0 1-3-.9l3 0V3.3z"/></svg>
+            TikTok
+          </div>
+          <div class="platform-btn" data-val="X (Twitter)">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.2 0h3.5l-7.6 8.7L23 24h-7l-5.5-7.2L4.3 24H.8l8.2-9.3L0 0h7.2l5 6.6L18.2 0zm-1.2 21.6h1.9L7.1 2H5L17 21.6z"/></svg>
+            X
+          </div>
+        </div>
+      </div>
+
+      <!-- Material Type -->
+      <div class="tag-group">
+        <div class="section-label">素材類型</div>
+        <div class="material-row" id="materialBtns">
+          <div class="material-btn active-green" data-val="高曝光">📈 高曝光</div>
+          <div class="material-btn" data-val="高轉化">🎯 高轉化</div>
+        </div>
+      </div>
+
+      <!-- URL Input -->
+      <div class="input-group">
+        <div class="section-label">成片連結</div>
+        <div class="url-input-wrap">
+          <textarea class="url-input" id="urlInput"
+            placeholder="貼入發佈連結，支援 YouTube / Instagram / TikTok / X&#10;&#10;例：https://www.youtube.com/watch?v=..."
+          ></textarea>
+        </div>
+        <div class="url-hint">每次分析一條連結。AI 將透過公開資訊進行內容層分析。</div>
+      </div>
+
+      <!-- Analyze -->
+      <button class="analyze-btn" id="analyzeBtn" onclick="runAnalysis()">
+        <div class="spinner"></div>
+        <span class="btn-text">開始分析</span>
+      </button>
+
+      <!-- History -->
+      <div id="historySection" style="display:none;">
+        <div class="divider"></div>
+        <div class="section-label" style="margin-bottom:10px;">近期分析</div>
+        <div class="history-list" id="historyList"></div>
+      </div>
+
+    </div>
+
+    <!-- ── Right Panel ── -->
+    <div class="panel-right" id="rightPanel">
+
+      <!-- Empty State -->
+      <div class="empty-state" id="emptyState">
+        <div class="empty-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#5b5bd6" stroke-width="1.5">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+          </svg>
+        </div>
+        <h3>貼入連結，開始分析</h3>
+        <p>選擇語區、平台、素材類型後，<br>貼入成片發佈連結即可獲得完整的六層分析報告。</p>
+      </div>
+
+      <!-- Results (hidden initially) -->
+      <div id="resultsArea" style="display:none;"></div>
+
+    </div>
+  </main>
+</div>
+
+<script>
+// ── State ──
+const state = {
+  region: 'EN',
+  platform: 'YouTube Long',
+  material: '高曝光',
+  apiKey: '',
+  history: []
+};
+
+// ── 3D AI Knowledge Base v1.0 (2026.06) ──
+const KNOWLEDGE_BASE = `
+你是一位專注於3D AI市場的KOL內容分析師，擅長從Growth視角拆解達人合作視頻的爆款邏輯與轉化潛力。
+以下是你的專業知識庫（v1.0，2026.06），請在分析時充分參考。
+
+---
+
+# 模塊一｜3D AI 市場產品地圖
+
+賽道範圍：文字/圖片轉3D模型、3D動畫生成、3D場景生成
+當前賽道階段（2026）：可用性競爭期。競爭焦點已從「能否生成」轉向「生成後能否真正進管線」——拓撲是否乾淨、能否打印、能否進 Blender/Unity/Unreal/Bambu Studio。
+
+## 主要競品定位
+
+### Meshy.ai
+- 定位：3D生成工具箱 + 創作者生態 + 3D Agent方向（2026）
+- 核心用戶：3D藝術家、遊戲開發者、3D打印愛好者、XR用戶；個人創作者到企業團隊
+- 差異化賣點：Text/Image to 3D、AI Texturing、Rigging & Animation、DCC Bridge、API、3D Agent Beta；與 Bambu Lab MakerWorld 深度整合（2026.03）；支持多色 3MF 直出
+- 定價（2026.05）：Free 10 assets/月；Pro $20/月 100 assets；Studio $60/月 400 assets；年付約8折
+- 真實用戶評價：「圖片轉3D準確、界面友好、可用於3D打印和Blender導入」（Trustpilot）；「複雜角色高模完成度達60%+；小遊戲制作周期從5天縮至2.5天」（三七互娱企業調研）；「直接把AI資產丟進遊戲會顯得粗糙；角色/NPC/風格一致性仍弱」（Reddit r/gamedev）
+- 內容策略方向：展示從Prompt/圖片→模型→導入引擎/Bambu Studio→成品的完整鏈路；多場景教程矩陣
+
+### Tripo AI
+- 定位：高頻低成本 3D 資產生成平台
+- 核心用戶：中長尾創作者、需要批量生成的遊戲/動畫/打印用戶、API整合開發者
+- 差異化賣點：Ultra Mesh、Smart Low-Poly、批量生成+批量導出；Tripo Studio 1.0（速度+200%）；100+動畫自動綁定；HD紋理Upscale；Turbo Mode ~10秒/模型
+- 定價（2026.05）：Free 8 models/月；Pro $13.93/月年付 120 models；Max 1000 models；Team 1800 models
+- 真實用戶評價：「易用性、速度、提示詞理解和模型質量獲普遍認可」（Trustpilot）；「紋理不穩定、AI幻覺、結果非每次精品；試用/帳單透明度問題」（負面）
+- 競爭動態：2025.12 白模生成 credits 砍半，單模型成本約 Meshy 的1/4，對 Meshy 用戶構成流失壓力
+
+### Hi3D.ai / Hitem3D
+- 定位：高精度幾何 + 3D打印鏈路 + 「圖片→實物」敘事
+- 核心用戶：3D打印玩家、手辦創作者、Etsy/小商家、產品設計者
+- 差異化賣點：Sparc3D x Ultra3D架構；隱藏面重建；4K PBR-ready；De-lighting；一鍵發送至Bambu Studio/OrcaSlicer
+- 定價（2026.05）：業界最高單價 $0.977–1.24/模型；年付30% off
+
+### Hyper3D / Rodin (Deemos Tech)
+- 定位：專業可控 3D 生成 + 編輯平台
+- 核心用戶：動畫師、VFX藝術家、遊戲角色製作、Blender重度用戶
+- 差異化賣點：「生成/Redo免費，確認下載才扣 credits」機制；OmniCraft 3D編輯；ChatAvatar角色系統；多參考圖融合；DCC Add-on；Rodin Gen-2（4倍網格質量）
+- 定價：Creator $24/月；Business $120/月；Education $24/月；7天免費
+
+### Hunyuan 3D（騰訊）
+- 定位：免費最慷慨 + 企業背書 + Text-to-Motion新賽道
+- 核心用戶：高頻個人創作者、企業API整合客戶、動畫生成需求者
+- 差異化賣點：每日20個免費模型；PolyGen 1.5原生Quad Mesh（業界SOTA）；HY-Motion 1.0開源（Text-to-Motion）；騰訊雲企業API全球開放
+- 定價：Free 每日20個；Plus $19.9/月；Premium $99.9/月
+- 戰略威脅：免費額度已足夠大多數個人用戶，直接衝擊競品付費轉化
+
+## 定價競爭排序（每模型成本，最低→最高）
+Tripo ($0.10) < Hunyuan ($0.167–0.249) < 3daistudio ($0.20–0.35) < Meshy ($0.40) < Rodin ($0.50) < Hitem3D ($1.24)
+
+---
+
+# 模塊二｜各語區用戶痛點 / 爽點圖譜
+
+資料口徑：Trustpilot、Reddit、App Store、Note、YouTube公開教程、KOL評論區（截至2026.05）
+
+## 跨語區共同痛點
+- Topology太差，不能進管線 → 內容反制：展示wireframe、導入截圖，不只看渲染圖
+- 3D打印可用性存疑 → 內容反制：展示切片截圖、真實打印照片、失敗修正過程
+- 商用/IP授權不清楚 → 內容反制：直接說明各方案商業授權範圍
+- 訂閱/扣費信任問題 → CTA用free credits/試用
+- 風格太generic → 展示reference圖控制效果；同系列風格一致性
+
+## EN 英語圈
+核心定性：最關注技術可用性，被「管線能否用」驅動
+核心痛點：Topology/UV/texture無法直接進生產管線；game-ready宣稱與實際清理量的落差；商用/IP/安全性疑慮；訂閱退款信任問題
+爽點：Game jam、Unity/Unreal placeholder、快速補資產缺口；概念資產、3D打印小物；非3D背景創作者快速起步
+最在意的驗証點：wireframe、polycount、UV、rigging實測；STL/3MF watertight；必須展示導入截圖，不能只有渲染圖
+強Hook模板："5 seconds from image to 3D asset" / "No Blender skills needed" / "Skip the retopo grind" / "Turn a sketch into a printable STL" / "Smart topology, not just pretty renders"
+可信CTA："Try it with free credits; check export and license before production use."
+避雷：直接承諾「fully game-ready」或「zero cleanup」；只展示渲染圖
+搜索詞：image to 3D, AI 3D model generator, game-ready 3D assets, low poly, retopology, STL 3MF, 3D printing from photo
+Hashtag：#AI3D #GameDev #IndieGameDev #Unity3D #UnrealEngine #Blender #3DPrinting #TextTo3D #ImageTo3D #LowPoly
+
+## JP 日語圈
+核心定性：最看重可驗証流程；有兩個EN市場沒有的獨有痛點
+核心痛點：「3Dプリントにそのまま使えるか」；「見た目が荒い」；「商用利用できるか」；「Blenderに読み込めるか」
+JP獨有痛點①IP道德壓力：日本同人文化有複雜的「原作者尊重」默契。用知名IP做AI 3D創作，即使技術上合法，在創作者社群仍有強烈道德壓力。2025-2026年日本文化廳確認AI單獨生成物不受著作権保護。
+JP獨有痛點②AI創作者身份焦慮：「這個作品還算不算是我的作品？」在JP創作者圈是真實且反覆糾結的問題。「是否標注AI」的選擇兩難。
+爽點：「画像1枚から」「数秒/数分」「無料で試せる」；「Blenderに読み込み」可驗証流程；「使ってみた」「手順」「比較」「実測」類內容比純宣傳更有效
+強Hook模板：「画像1枚から3Dモデル化してみた」/「Blenderに読み込んで検証」/「AI で 3D プリントしてみた」
+可信CTA：「無料クレジットで試せます。商用利用・出力形式は事前に確認してください。」
+避雷：プロ品質が一発（誇大宣傳）；用知名IP角色做示範案例；不提人工介入程度
+Hashtag：#3D生成AI #AI3D #MeshyAI #TripoAI #Blender #3Dプリント #ゲーム制作 #使ってみた #商用利用
+
+## KR 韓語圈
+核心定性：付費前疑慮最強；被「速度+真實후기」驅動
+核心痛點：「돈 낼 가치가 있을까」——付費前懷疑最強；App登入/訂閱體驗問題；免費版單圖限制
+爽點：「AI潮流 + 實際製作」的組合；照片一張10秒生成；動畫/部件分割/3D프린터 출력；「진짜 쓸만한가」「후기」類標題吃流量
+強Hook模板：「사진 한 장으로 3D 모델 만들기」/「AI 3D 진짜 쓸만한가?」/「유니티용 3D 모델 바로 가능할까?」
+可信CTA：「무료 크레딧으로 먼저 테스트하고, 유료 기능은 결과를 보고 결정하세요.」
+避雷：AI 대박（只炫技不展示管線）；不說明免費vs付費差異
+Hashtag：#AI3D #3D모델링 #3D프린터 #게임개발 #유니티 #블렌더 #생성형AI #후기 #사용법
+注意：haebokka_（KR 25.98M）是3D펜手工藝創作者而非AI 3D工具有機用戶，雖與Meshy有廣告合作，但其公式不可作為KR AI工具內容的複製模板。KR市場AI工具有機爆款參考：ai_newpd、kimplay。
+
+## FR 法語圈
+核心定性：版權/倫理敏感；教育/設計角度切入；反美式誇張
+核心痛點：Droits/licence/éthique——版權與AI倫理質疑；界面英文化帶來使用門檻；法語教程資源不足
+爽點：Sans compétence（不需要技能）；Image simple → modèle 3D；Rapide；教育/設計/3D printing角度
+強Hook模板：「Créer un modèle 3D sans compétence」/「Test honnête: Meshy vs Tripo」/「De JPG à STL」
+可信CTA："Essayez avec les crédits gratuits et vérifiez les droits d'usage avant un projet commercial."
+避雷：美式誇張文案；不提droits/licence限制；只有英文界面截圖無解說
+Hashtag：#IA3D #impression3D #modélisation3D #Blender3D #GameDev #MeshyAI #TripoAI #sanscompétence #tutorielIA
+
+## ES 西語圈
+核心定性：價格敏感 + 教程導向 + 多元使用場景
+核心痛點：價格敏感——是否真的值得付費；西語教程資源嚴重不足；是否真的「listo para juego / imprimir」；拓撲與商用授權不明確
+爽點：Sin saber modelar（不需要建模技能）；Gratis / en segundos（免費/秒速）；Para imprimir / para juegos（打印/遊戲用途）；建築、室內設計、遊戲小資產場景
+強Hook模板：「Crear modelos 3D sin saber modelar」/「De imagen a STL en minutos」/「Probé Meshy y Tripo para impresión 3D」
+可信CTA："Prueba con créditos gratis y revisa formatos/licencia antes de usarlo en producción."
+避雷：gana dinero con IA（B2B/專業投放慎用，降低專業信任）；不提具體步驟的純炫技；缺少西語說明
+Hashtag：#IA3D #Modelado3D #Impresion3D #Blender #Unity3D #SinSaberModelar #TextoA3D #ImagenA3D
+
+---
+
+# 模塊三｜爆款內容結構庫
+
+篩選口徑：YT Long最新Views > 2萬；短視頻 > 10萬
+數據來源：817條，目標語區EN/JP/KR/FR/ES共579條（截至2026.05）
+
+## 分析方法：先判斷情緒軸，再對應公式
+核心原則：不要從題材反推公式，要從情緒機制正推。
+分析一條視頻時，先問：「這條視頻在製造什麼情緒？」再對應公式。
+廣告合作創作者 vs 有機創作者：分析時需區分。廣告視頻的公式不一定等於品牌內容的可複製公式。
+
+## 六大爆款公式
+
+### F1｜圖片→實物 反差鉤子
+適用：EN/JP/KR/ES短視頻 ｜ 標竿：りくらぼ 5.3M、Laye 3D print 15M、Nick 3DLab 9.05M
+情緒機制：「看得見摸得著」的落地感；把想像變成現實的魔法感；「我也可以做」的低門檻共鳴
+敘事結構：①展示輸入圖（一張照片/塗鴉/截圖）→②AI生成3D模型（快剪，強調速度）→③切片/打印過程快剪→④完成實物大特寫（最強情緒高點）→⑤CTA
+最強Hook："Turn a monster drawn by your kid into a real toy" / "Gift them a custom figure of themselves" / 「遂に子供のイラストがフィギュアに👦🏻✨」（JP 2.08M）
+最佳題材：孩子塗鴉、寵物照片、個人化禮物、可愛角色、生活小物
+
+### F-JP1｜荒唐前提 × バカ真剣（JP專屬公式）
+適用：JP短視頻主力 ｜ 標竿：りくらぼ（穩定多條百萬）
+情緒機制：日本「認真搞笑」文化結構——荒唐前提→バカ真剣執行→反差笑點+微情感
+敘事結構：①荒唐な前提を提示（タイトル自体が笑えるか「なぜ？」な問い）→②動機説明（微情感が入る）→③AI生成＋3Dプリント過程を「実験ドキュメント」として見せる→④結果発表——成功でも失敗でも笑いが取れる構造→⑤オチに微情感
+有效前提：「〇〇は3Dプリントで作れるのか？」系の検証型；普通は買うもの/作るものをわざわざ3Dプリントする理由がある；ペット/家族/自分自身を巻き込む；失敗しても笑える設計
+核心洞察：タイトルの「前提の問い」さえ設計できれば残り70%は決まる。AIと3Dプリンターはその前提を実現する手段であって主役ではない。
+
+### F2｜VFX/現實合成 視覺衝擊
+適用：EN短視頻王炸 ｜ 標竿：omerterzivfx 37.83M、Next Level Studio 28.88M、tgh_learnings 21.65M
+⚠️ 門檻說明：代表創作者（Marcos Medel等）均有VFX/3D動畫專業背景。Meshy在流程中是「資產製作提速工具」，不是零門檻即可複製的公式。Brief時須說明此公式適合有VFX基礎的創作者。
+情緒機制：「讓觀眾懷疑自己的眼睛」的認知失調；不是「我也可以」，而是「這不可能是真的」
+敘事結構：①直接開場展示不可思議的視覺效果（0秒即衝擊）→②揭秘用了什麼AI工具→③簡短展示製作流程→④再次展示成果 + CTA
+
+### F3｜Game Dev 工作流展示
+適用：EN/KR/HI YT Long主力 ｜ 標竿：Mikkel Lassalle 2.36M、Clonemace 713K
+情緒機制：「省了幾週的建模時間」；professional output without professional skills；style-consistent批量資產
+敘事結構：①提出痛點（建資產包需要多久）→②展示AI快速生成過程→③導入Unity/Unreal/Blender驗証→④最終資產包成果展示→⑤成本/時間對比數字
+最強Hook："One chat. A whole asset pack." / "How To Make Games In Minutes Using AI!"
+
+### F4｜JP 使ってみた 實測驗証
+適用：JP長視頻主力 ｜ 標竿：クリプトハスキー 740K（多條穩定）
+情緒機制：「再現度確認」；可信度高（不誇大）；実測細節滿足JP用戶對信息密度的要求
+敘事結構：①明確說明「這次測試什麼」→②實際操作過程（不跳過失敗）→③Blender/Unity導入驗証截圖→④3Dプリント成品展示→⑤誠實總結優缺點
+最強Hook：「Meshy 6は本当に業界標準なのか？AI 3Dツール徹底比較レビュー」（740K）
+
+### F5｜AI Tool 發現型 /「你必須試試這個」
+適用：EN/KR泛短視頻 ｜ 標竿：bossmediatech 9.85M、ai_newpd KR 9.23M
+情緒機制：「我比別人先發現」的分享衝動；速度震撼；低門檻的「我也可以」感
+敘事結構：①直接說「我發現了一個工具」→②10秒展示最震撼的生成結果→③簡單說明輸入→輸出流程→④強調免費/快速/無需技能→⑤評論/鏈接引流CTA
+
+### F6｜生活小物 / 實用物件製作
+適用：JP/ES/DE短視頻 ｜ 標竿：98hobby JP 2.08M、andreita3d ES 1.95M
+情緒機制：「我自己設計製作的」成就感；物品的個人化/獨特性；「跳過最煩人的部分」
+最佳題材：手機殼、台燈、無線充電器、寵物屋、鑰匙扣
+
+## JP市場的四條情緒軸（分析JP視頻時先判斷軸）
+- 荒唐×本気（搞笑）：りくらぼ ｜ 荒唐前提→バカ真剣執行→反差笑點+微情感
+- 驚き×可愛さ：Laye | 3D print ｜ 圖片→実物 高品質反差
+- 信頼×検証：きすみ、98hobby ｜ 使ってみた 実測ドキュメント
+- 知識×安心：クリプトハスキー（長視頻） ｜ 徹底比較レビュー型
+
+## 視頻結構模板
+
+短視頻黃金結構（15-45秒）：
+- 0s：最終成果先出現（打印品/VFX/模型）——絕對不從界面開始
+- 3s：展示輸入（一張圖/一句話）
+- 8s：快剪生成過程（強調速度）
+- 20s：關鍵驗証（導入/切片截圖/打印）
+- 35s：CTA
+核心原則：先給結果，再解釋流程，最後補限制——所有語區的高爆款都遵循這個順序。
+
+YT Long黃金結構（8-15分鐘）：
+- 0:00 開場提問/挑戰
+- 1:00 工具介紹 + Mention Meshy（Brief要求早段出現）
+- 3:00 實際生成過程（含失敗案例）
+- 7:00 Blender/Unity/切片驗証（關鍵信任時刻）
+- 11:00 成本/時間對比數字
+- 13:00 誠實結論 + CTA
+
+## Brief通用要求
+必須有：早段mention Meshy；完整workflow展示；最終成果清晰可見；真實操作畫面（非純渲染）
+建議有：失敗/修正過程；時間/成本對比數字；導入第三方軟件截圖；評論引導互動
+禁止：只做純功能介紹；只展示渲染圖；宣稱「完全替代建模師」；JP市場用受保護IP角色作示範
+
+## 通用爆款規律
+- R1 成果優先：所有高爆款都把最終結果放在視頻0-3秒。沒有一條爆款從界面/注冊/功能介紹開始。
+- R2 輸入越簡單越爆：「一張照片」「一句話」「一張塗鴉」的輸入門檻越低，越容易引發「我也可以」的共鳴。
+- R3 語區情緒溫度不同：JP頂流靠「溫暖成就感」或「荒唐本気笑い」，KR靠「AI潮流感」，EN靠「視覺不可思議感」。同一個公式在不同語區需要不同情緒溫度。
+- R4 長視頻需要「可信度成本」：包含真實失敗案例、驗証截圖、工具比較。JP最吃徹底比較型，EN最吃Game Dev工作流型。
+- R5 3D打印是最強實物化鉤子：以真實打印成品作結尾的視頻，平均表現高於只展示屏幕的視頻。Meshy × MakerWorld整合後這個效應更強。
+- R6 平台分佈：IG Reels是EN/KR/ES短視頻主戰場；YT Shorts是JP主戰場；TikTok在ES/KR有強補充；X在EN技術圈有效。
+- R7 高表現創作者→長期合作：首次合作是質量篩選，確認質量後放量才是正確策略。
+
+## Hook庫
+情緒禮物類："Make a gift that doesn't exist anywhere else" / "Gift them a custom figure of themselves" / "Turn a monster drawn by your kid into a real toy"
+Game Dev類："One chat. A whole asset pack." / "Style-consistent assets, on autopilot"
+3D Print類："What you see is finally what you get" / "Multi-color 3D printing without manual painting" / "From photo to print in 3 steps"
+General AI Tool類："I found an amazing tool I have to share" / "No modeling skills needed / Only 10 seconds to learn it!"
+JP Hook：「ヤバいAIツール発見した⬇️」/「画像1枚から3Dモデル化してみた」/「〇〇は3Dプリントで作れるのか？」
+KR Hook：「사진 한 장으로 3D 모델 만들기」/「AI 3D 진짜 쓸만한가?」
+ES Hook：「Crear modelos 3D sin saber modelar」/「De imagen a STL en minutos」
+
+CTA模板："Got an idea? Meshy it now at 50% off via the link in bio" / "Comment '3D' and I'll share the exact workflow" / "Try it with free credits; check license before production use" / 「無料クレジットで試せます」/ 「무료 크레딧으로 먼저 테스트하세요」
+
+---
+
+# 模塊四｜行業背景框架
+
+## 賽道演進時間軸
+- 2024 新奇驗証期：「這很酷，但能用嗎？」→ 驅動詞：in seconds / no skills needed / free trial
+- 2025上 工具試用期：「可以當草模，但不能進生產」→ 驅動詞：game-ready? / export to Blender?
+- 2025下 場景分化期：3D打印用戶 vs 遊戲用戶標準分裂 → 驅動詞：print-ready STL/3MF / AI game asset pipeline
+- 2026 生產鏈路期：「AI可以幫我起步，但我只相信真實結果」→ 驅動詞：multi-color 3MF / real print result / from image to 3MF
+當前核心判斷：受眾不再被「AI生成了一個模型」打動，需要看到「這個模型真實進入了你的工作流」。
+
+## 行業關鍵趨勢（2026）
+①工作流閉環競爭：從「能生成」→「生成→編輯→優化→導出→打印/引擎/動畫」完整閉環。Meshy 3D Agent方向、Tripo批量導出、Bambu/Formlabs直接對接。
+②拓撲質量成行業新門檻：Quad Mesh成新標準（Hunyuan PolyGen 1.5、Rodin Gen-2、Tripo Smart Mesh）。Reddit：「直接丟進遊戲會爛掉，還是要手動retopo。」
+③3D打印賽道成形（最重要的外部增量）：Meshy × Bambu Lab MakerWorld深度整合（2026.03.17）——照片→2分鐘內瀏覽器生成print-ready 3D模型，自動映射多色.3MF，直接進Bambu Studio打印。Bambu 2025年月活突破1000萬。「從圖片到實物」成獨立爆款品類。
+④Text-to-Motion爆發：Hunyuan HY-Motion 1.0開源（10億參數，200+動作類別）；Tripo 100+動畫自動綁定；靜態模型→可動角色賽道融合。
+⑤免費層競爭白熱化：Hunyuan每日20個免費；Tripo Turbo超快免費；衝擊付費轉化。競對監控：Meshy用戶流失至Tripo和3daistudio。
+⑥IP/版權爭議升溫：MakerWorld Labubu訴訟（2026）；Disney/Universal起訴Midjourney（2025.06）；日本讀賣/朝日/日經相繼起訴Perplexity AI（2025.08起）。平台和KOL都需要明確合規邊界。
+
+## 高頻Objection與反制策略
+- 「Topology太差，沒法進管線」→ 展示Quad Mesh/wireframe導入Blender/Unity實況，不只看渲染圖
+- 「商業授權不清楚，怕被告」→ 直接說明付費方案商業授權範圍；JP市場需額外說明AI生成物著作権問題
+- 「風格太generic，沒有特色」→ 展示style reference圖的控制效果；同系列資產一致性案例
+- 「還是要手動修很多，沒省多少時間」→ 誠實說明「AI生成60-80% + 人工收尾」；用三七互娱數據：複雜項目提效30-40%，小遊戲提效50%
+- 「訂閱費不值得，免費夠用了」→ 計算批量生成的時間成本vs訂閱費；強調資產私有和商業授權的付費價值
+- 「AI會取代3D藝術家嗎？」→ 教育研究數據（西班牙動畫學院49人）：55%主動採用，共識是「有用的工具，不是替代」
+- 「AI模型是AI slop，社區不認可」→ 展示真實打印照片+原創說明；避免只用渲染圖當封面
+
+## IP/版權合規邊界（分析工具特別標注規則）
+分析成片內容時，若出現以下情況需在分析結果中標注：
+- 高版權風險：涉及Disney、Sanrio、任天堂、Labubu、Marvel、DC等受保護IP的3D生成或打印內容
+- JP市場特別提示：JP語區的內容若涉及知名IP AI創作，額外說明「JP創作者社群有強烈的原作者尊重文化，即使技術上合法，道德爭議仍存在」
+- 授權誤區：「平台商業授權」≠「輸入圖的版權也被覆蓋」，這是最常見的用戶認知錯誤
+用戶最在乎但市場沒有說清楚的問題：「我用AI生成的3D模型，商業上到底能不能用？」「如果我輸入了參考圖，生成的模型算侵權嗎？」——這類問題在評論區反覆出現，分析工具應將其識別為高轉化信號。
+
+## 高轉化關鍵詞庫
+遊戲/管線：game-ready、production-ready、low-poly、UV unwrap、PBR texture、auto-rigging、export to Blender/Unity
+3D打印：print-ready、clean mesh、Bambu Studio、multi-color 3MF、STL、one-click print、watertight
+速度/門檻：5 seconds、instant、no skills needed、no CAD、no Blender required、2 minutes
+工作流/效率：workflow automation、batch generation、full pipeline、3D Agent、DCC bridge
+商業/合規：commercial license、private assets、original work、IP compliant
+`;
+
+// ── Tag Selection Logic ──
+function setupSingleSelect(containerId, stateKey) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.querySelectorAll('[data-val]').forEach(el => {
+    el.addEventListener('click', () => {
+      container.querySelectorAll('[data-val]').forEach(e => {
+        e.classList.remove('active', 'active-green', 'active-amber');
+      });
+      if (stateKey === 'material') {
+        el.classList.add(el.dataset.val === '高曝光' ? 'active-green' : 'active-amber');
+      } else {
+        el.classList.add('active');
+      }
+      state[stateKey] = el.dataset.val;
+    });
+  });
+}
+
+setupSingleSelect('regionTags', 'region');
+setupSingleSelect('platformBtns', 'platform');
+setupSingleSelect('materialBtns', 'material');
+
+// ── API Key ──
+document.getElementById('apiKeyInput').addEventListener('input', function() {
+  state.apiKey = this.value.trim();
+  const dot = document.getElementById('apiStatus');
+  dot.className = 'api-status' + (state.apiKey.startsWith('sk-ant-') ? ' ok' : '');
+});
+
+// ── Platform label helper ──
+function getPlatformShort(p) {
+  if (p.includes('Long')) return 'YT Long';
+  if (p.includes('Shorts')) return 'YT Shorts';
+  return p;
+}
+
+// ── Build prompt ──
+function buildPrompt(url) {
+  const regionNames = { EN: '英語圈', JP: '日語圈', KR: '韓語圈', FR: '法語圈', ES: '西語圈' };
+  return `${KNOWLEDGE_BASE}
+
+---
+
+## 分析任務
+
+請對以下達人合作成片進行完整的六層分析。
+
+**分析參數：**
+- 語區：${state.region}（${regionNames[state.region] || state.region}）
+- 平台：${state.platform}
+- 素材類型：${state.material}素材
+- 連結：${url}
+
+**重要說明：** 由於無法直接存取影片內容，請基於以下方式進行分析：
+1. 從URL結構和平台推斷已知信息
+2. 結合3D AI市場知識庫，對該類型內容進行專業推斷分析
+3. 標注哪些是確定信息，哪些是基於平台/語區規律的推斷
+
+請按照以下六層結構輸出JSON格式分析報告（只輸出JSON，不要加任何markdown包裹）：
+
+{
+  "videoTitle": "影片標題（如無法確定請填「待確認」）",
+  "layer1": {
+    "title": "內容架構解剖",
+    "hook": {
+      "type": "Hook類型（問題型/驚喜型/對比型/數字型/懸念型）",
+      "duration": "估計Hook時長（秒）",
+      "mechanism": "Hook機制分析（一句話）",
+      "score": 0
+    },
+    "structure": "整體敘事結構描述（2-3句）",
+    "rhythm": "節奏密度評估",
+    "cta": {
+      "position": "CTA位置描述",
+      "type": "CTA類型",
+      "strength": "強/中/弱"
+    },
+    "topic_angle": "選題角度分析（1-2句）"
+  },
+  "layer2": {
+    "title": "爆款邏輯分析",
+    "pain_points": ["痛點1", "痛點2"],
+    "pleasure_points": ["爽點1", "爽點2"],
+    "emotion_trigger": "主要情緒觸發機制",
+    "why_works": "為什麼在${state.region}語區${state.platform}有效（2-3句）",
+    "viral_formula": "可提煉的爆款公式（一句話）",
+    "scores": {
+      "hook_power": 0,
+      "emotion_resonance": 0,
+      "shareability": 0
+    }
+  },
+  "layer3": {
+    "title": "受眾反應總結",
+    "emotion_distribution": {
+      "positive": 0,
+      "neutral": 0,
+      "negative": 0
+    },
+    "high_freq_keywords": ["關鍵詞1", "關鍵詞2", "關鍵詞3", "關鍵詞4", "關鍵詞5"],
+    "hot_keywords": ["熱詞1", "熱詞2"],
+    "conversion_signals": {
+      "strong": ["信號1", "信號2"],
+      "medium": ["信號1"],
+      "conversion_rate_estimate": "高/中/低"
+    },
+    "user_questions": ["用戶問題1", "用戶問題2", "用戶問題3"]
+  },
+  "layer4": {
+    "title": "達人匹配評估",
+    "persona_fit": "達人人設與3D AI產品的契合度評估（1-2句）",
+    "audience_alignment": "受眾畫像是否對齊目標用戶（1-2句）",
+    "expression_impact": "達人表達風格對轉化的影響（正面/負面因素各列一點）",
+    "fit_score": 0
+  },
+  "layer5": {
+    "title": "投放效能評估",
+    "performance_tier": "預估表現量級（頭部爆款/腰部達標/尾部偏低）",
+    "benchmark_comparison": "與同語區同類視頻橫向對比評估（1-2句）",
+    "engagement_quality": "互動質量評估（高/中/低，附理由）",
+    "roi_signal": "ROI信號評估（正向/中性/負向，附理由）"
+  },
+  "layer6": {
+    "title": "復用策略輸出",
+    "reusable_hooks": ["可復用Hook公式1", "可復用Hook公式2"],
+    "topic_directions": ["可延伸選題方向1", "可延伸選題方向2", "可延伸選題方向3"],
+    "language_style": "語言風格建議（針對${state.region}語區）",
+    "avoid": ["需規避雷區1", "需規避雷區2"],
+    "next_video_suggestions": ["給下一條視頻的具體建議1", "給下一條視頻的具體建議2", "給下一條視頻的具體建議3"]
+  }
+}
+
+所有分數字段（score/scores/fit_score）請填0-100的整數。`;
+}
+
+// ── Render Results ──
+function renderResults(data, url, meta) {
+  const area = document.getElementById('resultsArea');
+  const materialClass = meta.material === '高曝光' ? 'material-high' : 'material-convert';
+
+  area.innerHTML = `
+    <div class="results-header">
+      <div class="results-meta">
+        <div class="results-title">${data.videoTitle || '成片分析報告'}</div>
+        <div class="results-tags">
+          <span class="result-tag region">${meta.region}</span>
+          <span class="result-tag platform">${getPlatformShort(meta.platform)}</span>
+          <span class="result-tag ${materialClass}">${meta.material}</span>
+        </div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">${url}</div>
+      </div>
+      <button class="copy-all-btn" onclick="copyAll()">複製全部</button>
+    </div>
+
+    <div class="layers" id="layersContainer">
+      ${renderLayer1(data.layer1)}
+      ${renderLayer2(data.layer2)}
+      ${renderLayer3(data.layer3)}
+      ${renderLayer4(data.layer4)}
+      ${renderLayer5(data.layer5)}
+      ${renderLayer6(data.layer6)}
+    </div>
+  `;
+
+  // Auto-open first layer
+  const firstCard = area.querySelector('.layer-card');
+  if (firstCard) firstCard.classList.add('open');
+
+  // Layer toggle
+  area.querySelectorAll('.layer-header').forEach(h => {
+    h.addEventListener('click', () => {
+      h.parentElement.classList.toggle('open');
+    });
+  });
+}
+
+function layerCard(num, title, content) {
+  return `
+    <div class="layer-card">
+      <div class="layer-header">
+        <div class="layer-number">${num}</div>
+        <div class="layer-title">${title}</div>
+        <svg class="layer-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="layer-body">
+        <div class="layer-content">${content}</div>
+      </div>
+    </div>`;
+}
+
+function scoreBar(label, val, color='') {
+  return `<div class="score-row">
+    <div class="score-label">${label}</div>
+    <div class="score-bar"><div class="score-fill ${color}" style="width:${val}%"></div></div>
+    <div class="score-val">${val}</div>
+  </div>`;
+}
+
+function renderLayer1(d) {
+  if (!d) return layerCard(1, '內容架構解剖', '<p>數據不足，無法分析。</p>');
+  const content = `
+    <h4>Hook 設計</h4>
+    <div class="highlight-box">
+      <strong>${d.hook?.type || '—'}</strong>｜估計時長 ${d.hook?.duration || '—'} 秒<br>
+      ${d.hook?.mechanism || '—'}
+    </div>
+    ${d.hook?.score ? scoreBar('Hook強度', d.hook.score) : ''}
+    <h4>敘事結構</h4>
+    <p>${d.structure || '—'}</p>
+    <h4>節奏密度</h4>
+    <p>${d.rhythm || '—'}</p>
+    <h4>CTA 設計</h4>
+    <ul>
+      <li>位置：${d.cta?.position || '—'}</li>
+      <li>類型：${d.cta?.type || '—'}</li>
+      <li>強度：${d.cta?.strength || '—'}</li>
+    </ul>
+    <h4>選題角度</h4>
+    <p>${d.topic_angle || '—'}</p>
+  `;
+  return layerCard(1, '內容架構解剖', content);
+}
+
+function renderLayer2(d) {
+  if (!d) return layerCard(2, '爆款邏輯分析', '<p>數據不足，無法分析。</p>');
+  const painList = (d.pain_points || []).map(p => `<li>${p}</li>`).join('');
+  const pleasureList = (d.pleasure_points || []).map(p => `<li>${p}</li>`).join('');
+  const scores = d.scores || {};
+  const content = `
+    <h4>命中痛點</h4>
+    <ul>${painList}</ul>
+    <h4>觸發爽點</h4>
+    <ul>${pleasureList}</ul>
+    <h4>情緒觸發機制</h4>
+    <p>${d.emotion_trigger || '—'}</p>
+    <h4>為什麼有效</h4>
+    <p>${d.why_works || '—'}</p>
+    <h4>可提煉爆款公式</h4>
+    <div class="green-box">${d.viral_formula || '—'}</div>
+    <h4>效能評分</h4>
+    ${scoreBar('Hook爆發力', scores.hook_power || 0)}
+    ${scoreBar('情緒共鳴度', scores.emotion_resonance || 0, 'green')}
+    ${scoreBar('可分享性', scores.shareability || 0, 'amber')}
+  `;
+  return layerCard(2, '爆款邏輯分析', content);
+}
+
+function renderLayer3(d) {
+  if (!d) return layerCard(3, '受眾反應總結', '<p>數據不足，無法分析。</p>');
+  const emo = d.emotion_distribution || {};
+  const hotTags = (d.hot_keywords || []).map(k => `<span class="cloud-tag hot">${k}</span>`).join('');
+  const normalTags = (d.high_freq_keywords || []).map(k => `<span class="cloud-tag">${k}</span>`).join('');
+  const strongList = (d.conversion_signals?.strong || []).map(s => `<li>${s}</li>`).join('');
+  const qList = (d.user_questions || []).map(q => `<li>${q}</li>`).join('');
+  const content = `
+    <h4>情緒分佈</h4>
+    ${scoreBar('正面', emo.positive || 0, 'green')}
+    ${scoreBar('中性', emo.neutral || 0, 'amber')}
+    ${scoreBar('負面', emo.negative || 0)}
+    <h4>高頻關鍵詞</h4>
+    <div class="tag-cloud">${hotTags}${normalTags}</div>
+    <h4>強轉化信號</h4>
+    <ul>${strongList}</ul>
+    <h4>轉化率估算</h4>
+    <div class="highlight-box">轉化潛力：<strong>${d.conversion_signals?.conversion_rate_estimate || '—'}</strong></div>
+    <h4>用戶高頻問題</h4>
+    <ul>${qList}</ul>
+  `;
+  return layerCard(3, '受眾反應總結', content);
+}
+
+function renderLayer4(d) {
+  if (!d) return layerCard(4, '達人匹配評估', '<p>數據不足，無法分析。</p>');
+  const content = `
+    <h4>人設契合度</h4>
+    <p>${d.persona_fit || '—'}</p>
+    <h4>受眾對齊評估</h4>
+    <p>${d.audience_alignment || '—'}</p>
+    <h4>表達風格影響</h4>
+    <p>${d.expression_impact || '—'}</p>
+    <h4>匹配綜合評分</h4>
+    ${scoreBar('達人匹配度', d.fit_score || 0, 'green')}
+  `;
+  return layerCard(4, '達人匹配評估', content);
+}
+
+function renderLayer5(d) {
+  if (!d) return layerCard(5, '投放效能評估', '<p>數據不足，無法分析。</p>');
+  const content = `
+    <h4>表現量級預估</h4>
+    <div class="highlight-box"><strong>${d.performance_tier || '—'}</strong></div>
+    <h4>橫向對比</h4>
+    <p>${d.benchmark_comparison || '—'}</p>
+    <h4>互動質量</h4>
+    <p>${d.engagement_quality || '—'}</p>
+    <h4>ROI 信號</h4>
+    <p>${d.roi_signal || '—'}</p>
+  `;
+  return layerCard(5, '投放效能評估', content);
+}
+
+function renderLayer6(d) {
+  if (!d) return layerCard(6, '復用策略輸出', '<p>數據不足，無法分析。</p>');
+  const hookList = (d.reusable_hooks || []).map(h => `<li>${h}</li>`).join('');
+  const topicList = (d.topic_directions || []).map(t => `<li>${t}</li>`).join('');
+  const avoidList = (d.avoid || []).map(a => `<li>${a}</li>`).join('');
+  const nextList = (d.next_video_suggestions || []).map(s => `<li>${s}</li>`).join('');
+  const content = `
+    <h4>可復用 Hook 公式</h4>
+    <ul>${hookList}</ul>
+    <h4>可延伸選題方向</h4>
+    <ul>${topicList}</ul>
+    <h4>語言風格建議（${d.language_style ? '' : '—'}）</h4>
+    <p>${d.language_style || '—'}</p>
+    <h4>需規避雷區</h4>
+    <ul>${avoidList}</ul>
+    <h4>下一條視頻建議</h4>
+    <div class="green-box"><ul>${nextList}</ul></div>
+  `;
+  return layerCard(6, '復用策略輸出', content);
+}
+
+// ── Loading State ──
+function showLoading() {
+  const area = document.getElementById('resultsArea');
+  area.innerHTML = `
+    <div class="loading-status">
+      <div class="loading-dot"></div>
+      <div class="loading-dot"></div>
+      <div class="loading-dot"></div>
+      <span style="margin-left:8px;">AI 正在分析中，通常需要 15–30 秒...</span>
+    </div>
+    <div class="skeleton-results">
+      ${[1,2,3].map(i => `
+        <div class="skeleton-card">
+          <div class="skel h16 w60"></div>
+          <div class="skel w100"></div>
+          <div class="skel w80"></div>
+          <div class="skel w40"></div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+// ── Main Analysis ──
+async function runAnalysis() {
+  const url = document.getElementById('urlInput').value.trim();
+  const apiKey = document.getElementById('apiKeyInput').value.trim();
+
+  if (!url) {
+    alert('請貼入影片連結。'); return;
+  }
+  if (!apiKey) {
+    alert('請輸入 Anthropic API Key。'); return;
+  }
+
+  const btn = document.getElementById('analyzeBtn');
+  btn.disabled = true;
+  btn.classList.add('loading');
+
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('resultsArea').style.display = 'block';
+  showLoading();
+
+  const meta = { region: state.region, platform: state.platform, material: state.material };
+  const prompt = buildPrompt(url);
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 3000,
+        system: '你是3D AI市場KOL內容分析專家，知識庫版本v1.0（2026.06）。分析時請充分引用知識庫中的具體爆款公式（F1–F6、F-JP1）、語區痛點/爽點數據、通用規律（R1–R7）和行業趨勢，讓分析結論有具體依據而非泛泛而談。請嚴格按JSON格式輸出，不要包含任何markdown標記或額外說明文字。',
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    if (!response.ok) {
+      const err = await response.json();
+      throw new Error(err.error?.message || `API Error ${response.status}`);
+    }
+
+    const data = await response.json();
+    const rawText = data.content?.[0]?.text || '';
+
+    let parsed;
+    try {
+      const clean = rawText.replace(/```json|```/g, '').trim();
+      parsed = JSON.parse(clean);
+    } catch {
+      throw new Error('AI回傳格式異常，請重試。\n\n原始內容：' + rawText.slice(0, 200));
+    }
+
+    renderResults(parsed, url, meta);
+
+    // Save history
+    addHistory(url, meta);
+
+  } catch (err) {
+    document.getElementById('resultsArea').innerHTML = `
+      <div class="error-box">
+        <strong>分析失敗</strong><br>${err.message}
+      </div>
+      <div class="empty-state" style="height:auto;padding:40px 0;">
+        <p>請檢查 API Key 是否正確，或稍後重試。</p>
+      </div>
+    `;
+  } finally {
+    btn.disabled = false;
+    btn.classList.remove('loading');
+  }
+}
+
+// ── History ──
+function addHistory(url, meta) {
+  const item = { url, meta, time: new Date().toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit' }) };
+  state.history.unshift(item);
+  if (state.history.length > 5) state.history.pop();
+  renderHistory();
+}
+
+function renderHistory() {
+  const section = document.getElementById('historySection');
+  const list = document.getElementById('historyList');
+  if (state.history.length === 0) { section.style.display = 'none'; return; }
+  section.style.display = 'block';
+  list.innerHTML = state.history.map((item, i) => `
+    <div class="history-item" onclick="loadHistory(${i})">
+      <div class="history-dot"></div>
+      <div class="history-url">${item.url}</div>
+      <div class="history-time">${item.time}</div>
+    </div>
+  `).join('');
+}
+
+function loadHistory(i) {
+  const item = state.history[i];
+  document.getElementById('urlInput').value = item.url;
+}
+
+// ── Copy All ──
+function copyAll() {
+  const area = document.getElementById('resultsArea');
+  const text = area.innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = area.querySelector('.copy-all-btn');
+    btn.textContent = '已複製 ✓';
+    setTimeout(() => { btn.textContent = '複製全部'; }, 2000);
+  });
+}
+
+// ── Enter key support ──
+document.getElementById('urlInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) runAnalysis();
+});
+</script>
+</body>
+</html>
