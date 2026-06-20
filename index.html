@@ -491,17 +491,17 @@ tbody tr:hover{background:var(--bg2);}
     <div class="org-layout">
       <nav class="org-sidebar" id="org-sidebar">
         <div class="org-sidebar-section">
-          <div class="org-sidebar-label">Region</div>
+          <div class="org-sidebar-label" data-en="Region" data-zh="語區">Region</div>
           <div class="org-region-scroll"><div id="org-region-nav"></div></div>
         </div>
         <div class="org-sidebar-divider"></div>
         <div class="org-sidebar-section">
-          <div class="org-sidebar-label">Direction</div>
+          <div class="org-sidebar-label" data-en="Direction" data-zh="內容方向">Direction</div>
           <div class="org-cat-scroll"><div id="org-cat-nav"></div></div>
         </div>
         <div class="org-sidebar-divider"></div>
         <div class="org-sidebar-section">
-          <div class="org-sidebar-label">Platform</div>
+          <div class="org-sidebar-label" data-en="Platform" data-zh="平台">Platform</div>
           <div id="org-plat-nav"></div>
         </div>
       </nav>
@@ -760,22 +760,6 @@ const BREAKOUT_CASES=[
     verdict:'CPM $0.06 是全库最低，说明内容本身即是投流素材级别。视觉语言无国界，这类内容在任何语区都具备冷启动能力。优先级：跨区复制。'
   },
   {
-    name:'Laye | 3D print',region:'JP',platform:'Instagram',month:'2026年5月',views:15000000,spend:1800.0,cpm:0.12,
-    url:'https://www.instagram.com/laye3dprint/',
-    topic:'3D Print 成品展示 × 生活感',
-    hook_type:'情绪共鸣型 — 可爱成品第一帧直接入画，无废话',
-    structure:'0-1s 成品特写 → 2-8s 制作过程快速剪辑 → 9-15s 使用/摆放场景，强生活感结尾',
-    cta:'Meshy link in bio',
-    viral_formula:'可爱物件 + 自己做得到 + 实用/收藏价值',
-    pain_point:'想要独特装饰/道具但买不到，设计感缺失',
-    emotion:'喜爱 → 想要 → "我也要做"冲动',
-    audience_reaction:'高保存率，评论多为"かわいい！""どこで買えるの？""Meshy使いたい"',
-    keywords:'"かわいい","作ってみたい","3Dプリンター欲しい","Meshy使いたい"',
-    conversion_signal:'保存率高过平均，粉丝导流稳定，JP 区 CPM $0.12 极优',
-    reuse:'Hook 公式：[成品特写，无文字] → [快剪制作] → [使用场景]。JP 区最强模板，可批量复制给 りくらぼ、Printiq 等类似风格创作者。',
-    verdict:'JP 区 15M views 第一名。成功关键是「生活感」——不是展示工具，是展示结果进入生活的画面。这个思路对所有 JP/KR 创作者都适用。'
-  },
-  {
     name:'Next Level Studio',region:'EN',platform:'Instagram',month:'2026年3月',views:28880000,spend:1500.0,cpm:0.18,
     url:'https://www.instagram.com/nextlevelstudio/',
     topic:'AI工具发现型 — 震惊式开场',
@@ -868,23 +852,6 @@ const BREAKOUT_CASES=[
     kolName:'りくらぼ ⧸ Rikulab'
   },
   {
-    name:'りくらぼ / RikuLab',region:'JP',platform:'YouTube Shorts',month:'2026年04月',views:1991735,spend:2400.0,cpm:1.2,
-    url:'https://www.youtube.com/shorts/_jxnHfO6p18',
-    topic:'3D Print 安定期 — Funny & Creative 4月版',
-    hook_type:'成品ファースト型 — 完成品を開幕ゼロ秒で見せ、観客を引き留める',
-    structure:'0-1s 完成品クローズアップ → 2-15s 制作プロセス（時短版） → 16-25s 使用シーン + 生活感',
-    cta:'チャンネル登録 / Meshy link in description',
-    viral_formula:'完成品の訴求力 + プロセスの納得感 + 生活への溶け込み',
-    pain_point:'市販品では個性を出せない、自分だけのアイテムが欲しい',
-    emotion:'これかわいい → 自分でも作れる → チャンネル登録して次も見たい',
-    audience_reaction:'4月期の最高パフォーマンス、固定ファン層からの高エンゲージメントが確認できる',
-    keywords:'"また作った","神","欲しい","Meshy最高"',
-    conversion_signal:'既存フォロワーからの即時エンゲージメント、新規流入も安定',
-    reuse:'成熟期クリエイターの安定フォーマット。CPMが上昇しても200万近いリーチを維持できる点が長期合作の強み。',
-    verdict:'2.0M views · CPM $1.2。CPM上昇期においても200万リーチを維持。クリエイター成熟度の証明であり、長期契約継続の根拠となる案例。',
-    analysisSource:'organic_exact_match'
-  },
-  {
     name:'りくらぼ / RikuLab',region:'JP',platform:'YouTube Shorts',month:'2026年03月',views:1566601,spend:2400.0,cpm:1.53,
     url:'https://youtube.com/shorts/ISSYX1cG3Wg',
     category:'3D打印 - 搞笑创意',
@@ -955,22 +922,6 @@ const BREAKOUT_CASES=[
     conversion_signal:'评论区主动索取教程链接，订阅率跟投放量相关性强',
     reuse:'Hook 公式："[我用这个工具做了X] + [流程] + [结果]"。适合有技术背景受众的 EN 区创作者。CPM $1.05 对于信任型内容属正常区间，转化质量高。',
     verdict:'多次合作稳定产出（12月/2月/3月三次），说明创作者内容节奏稳定、质量可控。长期合作创作者的价值在于内容一致性，建议持续包月合作。'
-  },
-  {
-    name:'airi｜100均DIY×便利グッズ',region:'JP',platform:'Instagram',month:'2026年4月',views:1912090,spend:1800.0,cpm:0.94,
-    url:'https://www.instagram.com/i_house.8/',
-    topic:'百元店材料 × 3D打印 = 高级感小物',
-    hook_type:'对比型 — 低成本材料 vs 精致成品',
-    structure:'0-2s 百元店材料展示 → 3-12s DIY制作+3D辅助环节 → 13-20s 完成品展示，强视觉冲击',
-    cta:'Meshy link in bio',
-    viral_formula:'低成本高回报 + 生活感 + 女性向美学',
-    pain_point:'想要高级感家居单品但价格贵',
-    emotion:'惊喜 → 想复制 → 保存/分享',
-    audience_reaction:'日本女性受众为主，保存率极高，生活感内容黏性强',
-    keywords:'"真似したい","セリアで売ってる？","どこで印刷できる","かわいすぎ"',
-    conversion_signal:'保存/收藏行为明显，多次合作均维持高互动',
-    reuse:'Hook 公式：[廉价材料] + [3D打印辅助] + [高级感成品]。JP 女性向生活类强模板，适合扩展至 KR 区同类生活 DIY 创作者。',
-    verdict:'JP 女性向生活内容的代表案例。CPM $0.94 在 JP 区属优质水位，且受众与 Meshy 目标用户中"想创作但没技术"的群体高度重合。'
   },
   {
     name:'vanyblue_',region:'EN',platform:'Instagram',month:'2026年2月',views:1597558,spend:900.0,cpm:0.56,
@@ -1053,22 +1004,6 @@ const BREAKOUT_CASES=[
     verdict:'Janis 在同一时间段发布了多条高表现长视频（407K/351K/329K），说明教程型内容在 YT 有持续搜索需求。值得作为长期合作标杆。'
   },
   {
-    name:'クリプトハスキー',region:'JP',platform:'YouTube Long',month:'2026年1月',views:740300,spend:0.0,cpm:0.0,
-    url:'https://www.youtube.com/@cryptohusky',
-    topic:'AI 3D ツール徹底比較レビュー',
-    hook_type:'评测型 — "Meshy 6は本当に業界標準なのか？"',
-    structure:'0-30s 結論予告 → AI 3Dツール複数比較 → Meshy の強み強調 → 初心者向けまとめ',
-    cta:'概要欄のリンクから無料トライアル',
-    viral_formula:'徹底比較 + 業界視点 + 初心者に優しい結論',
-    pain_point:'どの AI 3D ツールを使えばいいかわからない',
-    emotion:'悩み解消 → 信頼 → 試してみる',
-    audience_reaction:'JP テック受眾，评论多为工具对比追问，订阅率稳定',
-    keywords:'"Meshy 使ってみた","比較動画","初心者でも","業界標準","無料で使える？"',
-    conversion_signal:'工具评测内容在 JP 区 SEO 价值高，带来持续自然流量',
-    reuse:'Hook 公式："[新バージョン] は本当に [業界の主張] なのか？徹底検証。"。JP 区工具评测长视频的核心模板，クリプトハスキー 是该垂类第一人选。',
-    verdict:'$0 spend，74万 views，JP 区 YT Long 第一。日本受众对工具评测内容信任度高，且有深度阅读习惯。配合版本发布节点投放此类内容效果最佳。'
-  },
-  {
     name:'haebokka_',region:'EN',platform:'Instagram',month:'2026年3月',views:25980000,spend:0.0,cpm:0.0,
     url:'https://www.instagram.com/haebokka_/',
     topic:'AI趋势 × 视觉冲击 (KR受眾 EN平台)',
@@ -1127,22 +1062,6 @@ const BREAKOUT_CASES=[
     kolName:'プッカ / pukka_japan'
   },
   {
-    name:'Printiq',region:'JP',platform:'Instagram',month:'2026年4月',views:907200,spend:1800.0,cpm:1.99,
-    url:'https://www.instagram.com/printiq3d/',
-    topic:'3D Print 完成品クオリティ展示',
-    hook_type:'品質訴求型 — 圧倒的な完成品クオリティで語らせる',
-    structure:'0-2s 超高品質な完成品アングル × 複数 → 3-12s 制作工程ハイライト → 13-20s 細部クローズアップ',
-    cta:'Meshy link in bio',
-    viral_formula:'クオリティショック + プロ並みの完成度 + "自分には無理"と思わせない',
-    pain_point:'3Dプリントの品質が低そうという先入観',
-    emotion:'すごい → プロっぽい → 自分もできそう',
-    audience_reaction:'3D print専門受众，品質コメントが多く，フォロワー定着率が高い',
-    keywords:'"クオリティやばい","これ家で作れるの","Meshy使った？","印刷サービスは"',
-    conversion_signal:'品質認知による高意向ユーザーの誘導，フォロワー→トライアル転化が安定',
-    reuse:'Hook公式：[完成品の最高アングル，テキストなし] → [工程] → [細部]。Printiqは月複数投稿で安定高表現。品質訴求型コンテンツは比較検討フェーズのユーザーに効果的。',
-    verdict:'CPM $1.99はJP区やや高め，ただし品質重視層の転化単価は低い傾向。5月も854K viewsを維持しており，安定したJP区3D printアカウント。'
-  },
-  {
     name:'ミコンスキー🦊',region:'JP',platform:'Instagram',month:'2026年3月',views:983000,spend:0.0,cpm:0.0,
     url:'https://www.instagram.com/mikonski_y/',
     topic:'VFX現実合成 — 指に穴AI合成',
@@ -1173,22 +1092,6 @@ const BREAKOUT_CASES=[
     conversion_signal:'普段3Dに無関心な層へのリーチ，Meshy認知の間口拡大に有効',
     reuse:'Hook公式：[既存スキル/仕事文脈] + [AIツールで解決] + [意外な3D活用]。3D専門外の受众へのリーチに特化したテンプレ。ビジネス系KOLへの展開に直接転用可。',
     verdict:'CPM $1.65。3D専門ではないインフルエンサーがMeshyを紹介することで，普段リーチできない層に届く。認知拡大フェーズでの多様なKOL起用の典型成功例。'
-  },
-  {
-    name:'ものこと⌇ガジェットに囲まれた暮らし',region:'JP',platform:'Instagram',month:'2026年1月',views:636700,spend:0.0,cpm:0.0,
-    url:'https://www.instagram.com/mono_koto_life/',
-    topic:'ガジェット系 × スマホケース3D打印',
-    hook_type:'ガジェット発見型 — "まるでデザイナー気分"',
-    structure:'0-2s ガジェット文脈での問題提起 → 3-12s Meshyでスマホケース設計〜生成 → 13-20s 完成品 + 日常使い',
-    cta:'Meshy link in bio',
-    viral_formula:'"デザイナー気分"の感情価値 + ガジェット好きの所有欲 + 実用性',
-    pain_point:'欲しいスマホケースが市販品にない，デザインの個性が出せない',
-    emotion:'これ作りたい → 自分のデバイスに合わせたい → 保存',
-    audience_reaction:'JP ガジェット・テック男性受众，具体的なデザイン質問とツール問い合わせが多い',
-    keywords:'"スマホケース","どのプリンター","設計","Meshy無料？","デザイン変えられる"',
-    conversion_signal:'ガジェット受众はツール購入への抵抗が低く，高転化意向',
-    reuse:'Hook公式：[欲しいガジェットアクセサリー] + [Meshyで設計] + [完成品使用]。JP ガジェット系KOLへの汎用テンプレ。実用性重視の男性受众に最適。',
-    verdict:'$0 spend 63万 views。ガジェット×3D printは男性JP受众の購買意欲を高める組み合わせ。スマホケース，充電器ホルダー，イヤホンスタンドなど応用が無限。'
   },
   {
     name:'nookle_lab',region:'JP',platform:'Instagram',month:'2026年3月',views:781100,spend:0.0,cpm:0.0,
@@ -1713,8 +1616,9 @@ const BREAKOUT_CASES=[
   },
   {
     name:'3Dプリンター副業リーマン',platform:'Instagram',month:'2026年03月',
+    url:'https://www.instagram.com/kobahii3d/reel/DVvc-wskf-5/',
     publishDate:'2026-03-11',
-    category:'3D打印 - 情绪礼物',
+    category:'3D打印 - 实用小物',
     hookType:'结果先行型',
     hookContent:'用AI制作了QR立牌',
     first3Sec:'前3秒直接展示完成品，搭配大字标题强化AI制作卖点',
@@ -1758,30 +1662,6 @@ const BREAKOUT_CASES=[
     scores:{hook:8.0,visual:7.0,emotion:8.0,retention:8.0,conversion:5.0,viral:8.0},
     summary:'AI工具用「頭的中的可爱想象」实物于变能体験情绪主导用展示AI×3D打印的共鸣型内容',
     kolName:'98hobby ｜ 3Dプリント雑貨'
-  },
-  {
-    name:'ものこと⌇ガジェットに囲まれた暮らし',platform:'Instagram',month:'2026年01月',
-    publishDate:'2026-01-23',
-    category:'AI工具',
-    hookType:'结果先行型',
-    hookContent:'3D打印机和用AI世界唯一的手机壳制作了',
-    first3Sec:'开頭直接拋出「3D打印×AI」的结合成果，强调「世界唯一」的稀缺感，吸引对客制化或AI工具感興趣的用户停留',
-    structure:'痛点提出（3D建模门槛高）> AI工具揭示（Meshy AI）> 功能展示（文字/手绘转3D模型）> 成品展示（手机壳组合）> 延伸功能介紹（Luma AI图像与影片生成）> CTA',
-    visualReward:'多个AI生成零件组合成可爱手机壳的成品展示画面，视觉冲击最强，强化「门外漢也能做到」的惊喜感',
-    ctaType:'试用',
-    ctaContent:'感兴趣的人一定要试试看（有興趣的人一定要试试看）',
-    painPoint:'想玩3D打印但建模门槛太高，普通人难以上手',
-    emotionMechanism:'好奇',
-    emotionDistribution:'好奇60%+惊喜30%+成就感10%',
-    viralFormula:'3D打印门槛痛点 × AI秒生成3D模型 × 世界唯一客制化成品',
-    conversionSignal:'有；明确点名Meshy AI与Luma AI工具名称，具備导流与试用转化意图',
-    replicability:'高；痛点普遍、工具公开可用、流程可复制，换成其他AI工具或3D打印品类同样成立',
-    brandAdaptation:'3D打印品牌或AI设计工具可直接套用此结构：展示用户痛点（不会建模）→ 介紹产品如何一键解决 → 展示客制化成品 → 引导试用或购买',
-    keywords:'3D打印机、AI工具、Meshy AI、手机壳、3D模型生成',
-    reusableFormula:'先点出目标用户的技术门槛痛点，再用AI工具秒速实现梦想成品，以客制化结果制造惊喜感收尾',
-    scores:{hook:8.0,visual:7.0,emotion:7.0,retention:8.0,conversion:8.0,viral:8.0},
-    summary:'以「3D打印×AI工具」破解建模门槛痛点，用世界唯一客制化成品制造惊喜，精准导流AI工具试用',
-    kolName:'ものこと⌇ガジェットに囲まれた暮らし'
   },
   {
     name:'generativeartstudio',platform:'Instagram',month:'2026年01月',
@@ -2555,6 +2435,406 @@ const BREAKOUT_CASES=[
     summary:'以粉丝瘋狂挑战为钩子，借助Meshy AI工具生成3D模型并打印，以搞笑互动结果完成娱乐闭环并植入品牌',
     kolName:'LeVraiGabin',
     crossPlatform:true
+  },
+  {
+    name:'Sanchit Gamedev',region:'HI',platform:'YT Long',month:'2025年07月',
+    url:'https://www.youtube.com/watch?v=xVFGx0qyp_k',
+    publishDate:'2025-07-24',
+    kolName:'Sanchit Gamedev',
+    category:'综合',
+    hookType:'数字型',
+    hookContent:'21年等待：GTA SA的体重机制终于要在GTA 6回归',
+    first3Sec:'用「21年」数字制造时间冲击感，配合GTA 6 logo视觉，立即勾起玩家情怀与好奇心',
+    structure:'痛点提问（为何等21年）> 历史回顾（GTA SA体重机制）> 技术问题拆解（骨架动画限制）> 专利揭密（Rockstar新技术）> 未来展望（GTA 6实现可能）> 赞助商介绍 > 行动号召',
+    visualReward:'帧3-5出现「21 YEARS」霓虹大字渐显，视觉冲击强烈，完美呼应口播21年等待的核心信息',
+    ctaType:'点击',
+    ctaContent:'视频结尾引导观众前往YouTube观看完整技术分析视频',
+    painPoint:'GTA玩家等待21年，至今无任何开放世界游戏能实现真实体型多样性与动画系统',
+    emotionMechanism:'好奇',
+    emotionDistribution:'好奇60%+怀旧感动25%+惊喜15%',
+    viralFormula:'21年情怀等待 × 深度技术揭密 × GTA 6期待爆棚',
+    conversionSignal:'弱；有赞助商提及（AI工具），但整体以内容为主，转化引导不强',
+    replicability:'中；技术分析框架可复制，但需要深厚游戏知识与专利解读能力，门槛较高',
+    brandAdaptation:'AI工具或3D软件品牌可仿照「X年来最大突破」框架，结合自身产品技术革新点，用怀旧对比+专利/数据佐证来展示产品核心优势',
+    keywords:'GTA 6、Rockstar、动画系统、体型多样性、机器学习',
+    reusableFormula:'「X年的等待+业界最大技术难题+专利揭密+未来实现预告」= 深度科普爆款结构',
+    scores:{hook:8,visual:7,emotion:8,retention:7,conversion:4,viral:7},
+    summary:'以21年情怀数字为钩，深度拆解Rockstar专利技术，将硬核知识包装成玩家必看的GTA 6期待内容'
+  },
+  {
+    name:'Xenoks',region:'FR',platform:'YT Long',month:'2026年02月',
+    url:'http://youtube.com/watch?v=helhTpMIagQ',
+    publishDate:'2026-02-19',
+    kolName:'Xenoks',
+    category:'游戏开发',
+    hookType:'对比型',
+    hookContent:'同一个Mario游戏，1分钟vs1小时vs10小时的差距对比',
+    first3Sec:'直接展示10小时成品的3D Mario游戏画面，立即制造期待感，吸引观众想看完整个进化过程',
+    structure:'结果预告（10小时成品）> 最低标对比（1分钟版本）> 逐步升级（10分钟→1小时→10小时）> 真人试玩反应 > 最终成品展示',
+    visualReward:'第4-5帧出现完整3D Mario世界场景，角色在草地上奔跑，水池与环境细节丰富，视觉质量接近商业游戏水准',
+    ctaType:'其他',
+    ctaContent:'未知',
+    painPoint:'普通人好奇「一个人能在极短时间内做出多好的游戏」，满足对创作效率与技术极限的好奇心',
+    emotionMechanism:'好奇',
+    emotionDistribution:'好奇60%+惊喜30%+成就感10%',
+    viralFormula:'时间限制挑战 × 逐步质量升级对比 × 真人反应放大惊喜',
+    conversionSignal:'无',
+    replicability:'高 + 时间对比挑战结构通用，可套用于任何创作类内容（3D打印、绘画、设计、程序）',
+    brandAdaptation:'3D打印品牌可改编为「1分钟vs1小时vs10小时的3D打印作品对比」，展示设备能力与创作潜力，吸引创客族群关注',
+    keywords:'Mario、游戏开发、时间挑战、3D游戏、进化对比',
+    reusableFormula:'用「X分钟 vs X小时 vs X天」的时间递进结构，展示同一主题从粗糙到惊艳的创作进化历程',
+    scores:{hook:9,visual:8,emotion:8,retention:9,conversion:4,viral:8},
+    summary:'以时间递进对比结构驱动完播率，用真人试玩反应放大惊喜情绪，是高度可复制的创作挑战类爆款公式'
+  },
+  {
+    name:'うるこりす',region:'JP',platform:'YT Shorts',month:'2025年08月',
+    url:'https://www.youtube.com/shorts/V_D4pg9Ex2I',
+    publishDate:'2025-08-27',
+    kolName:'うるこりす',
+    category:'3D打印 - 搞笑创意',
+    hookType:'痛点型',
+    hookContent:'夏天去不了海边的孤独宅男，用3D打印打造最强沙堡模具',
+    first3Sec:'以自嘲「一个人去不了海边」制造共鸣笑点，瞬间吸引同样独处的观众停留',
+    structure:'自嘲痛点导入 > AI工具生成3D模型 > 模型微调与打印 > 第一次失败（室内沙太细） > 户外沙场实测成功 > 成品展示 > 行动号召',
+    visualReward:'沙地中用3D打印模具压出完整沙堡造型的实拍成果，与室内失败形成强烈前后对比',
+    ctaType:'关注',
+    ctaContent:'订阅频道并告诉我下次做什么',
+    painPoint:'想做有趣手工但3D建模太难，AI工具让零基础也能快速实现创意',
+    emotionMechanism:'搞笑',
+    emotionDistribution:'搞笑50%+好奇30%+成就感20%',
+    viralFormula:'孤独宅男自嘲 × AI秒生3D模型 × 沙滩成品反差爆笑',
+    conversionSignal:'弱；提及Meshy AI工具名称并展示操作流程，具软性导流效果但无明确购买链接',
+    replicability:'高；自嘲开场+AI工具+3D打印+生活场景实测的结构清晰，任何品类均可套用',
+    brandAdaptation:'Meshy AI可直接以此片作广告素材，强化「输入关键字即出3D模型」的核心卖点；3D打印品牌可仿制结构，替换成品主题吸引DIY受众',
+    keywords:'3D打印机、AI模型生成、Meshy AI、沙堡、DIY',
+    reusableFormula:'用自嘲式生活痛点开场，展示AI工具解决创意难题的完整过程，以意外失败再反转成功收尾',
+    scores:{hook:8,visual:6,emotion:7,retention:8,conversion:5,viral:7},
+    summary:'以孤独宅男自嘲切入，串联AI建模+3D打印+沙滩实测，笑点与工具展示并行驱动完播'
+  },
+  {
+    name:'おくらすVRちゃんねる - メタクエスト活用情報局',region:'JP',platform:'YT Long',month:'2025年10月',
+    url:'https://www.youtube.com/watch?v=zwuqmTznjAg',
+    publishDate:'2025-10-14',
+    kolName:'おくらすVRちゃんねる - メタクエスト活用情報局',
+    category:'AI工具',
+    hookType:'悬念型',
+    hookContent:'AI 的进化很惊人，发现了可以从文本、图像生成 3D 模型的工具「Meshy」',
+    first3Sec:'用赛博空间风格的 3D 视觉吸引观众，并通过对 AI 进化的共鸣诉求促使停留',
+    structure:'课题提出（AI应用的必要性）> 工具介绍（Meshy）> 功能解说（图像→3D生成、重拓扑、纹理）> VRChat实装演示 > 其他用户作品介绍 > 价格说明 > 行动号召',
+    visualReward:'在 VRChat 空间内实际走动查看 AI 生成的 3D 模型，包括马克杯、时钟、怪物等高质量模型的近距离验证',
+    ctaType:'点击',
+    ctaContent:'请通过简介栏链接访问 Meshy 网站；也欢迎订阅频道并点赞',
+    painPoint:'3D 建模需要大量时间和技术，AI 可以大幅削减工时',
+    emotionMechanism:'好奇',
+    emotionDistribution:'好奇60%+惊喜30%+成就感10%',
+    viralFormula:'1张AI图像 × 高质量3D模型自动生成 × VRChat真实空间惊喜验证',
+    conversionSignal:'有：简介栏包含付费方案与免费100积分注册链接，可能存在联盟导流路径',
+    replicability:'高：其他AI工具、其他平台（Blender联动、游戏开发等）也可用同一结构延展',
+    brandAdaptation:'3D打印品牌或游戏资产服务可介绍 Meshy 联动工作流，作为自家产品提升制作效率的案例进行诉求',
+    keywords:'Meshy、AI 3D模型生成、VRChat、纹理自动生成、重拓扑',
+    reusableFormula:'「某项麻烦作业」×「AI工具一步解决」×「实际完成物在真实环境中验证」',
+    scores:{hook:6,visual:7,emotion:7,retention:8,conversion:7,viral:7},
+    summary:'用 VRChat 实装验证 AI 3D 模型生成工具「Meshy」，以好奇心和惊喜驱动观众看到最后的信息型评测视频'
+  },
+  {
+    name:'たてはま / CGBeginner',region:'JP',platform:'YT Long',month:'2026年01月',
+    url:'https://www.youtube.com/watch?v=yyHMNNOvpUA',
+    publishDate:'2026-01-30',
+    kolName:'たてはま ⧸ CGBeginner',
+    category:'AI工具',
+    hookType:'结果先行型',
+    hookContent:'公开电影感 CG 影像，并揭示其实是全 CGA 制作',
+    first3Sec:'先展示完成品电影级CG影像，再揭露「这其实是全CG」制作前画面，制造强烈视觉落差引发好奇',
+    structure:'成品展示 > 制作前画面揭示 > AI工具介绍(Meshy) > 功能演示(图片转3D/文字转角色/纹理生成/Rigging) > 汇入Blender合成 > 最终视频输出',
+    visualReward:'Blender中AI生成角色套用PBR材质与动画后的电影级渲染画面，发光红色细节+景深模糊强化真实感',
+    ctaType:'点击',
+    ctaContent:'免费方案也可以体验，感兴趣的人请从简介栏进入链接',
+    painPoint:'无3D建模技术却想制作电影级CG影像，AI一键解决专业门槛',
+    emotionMechanism:'好奇',
+    emotionDistribution:'好奇55%+惊喜30%+成就感15%',
+    viralFormula:'AI 3D模型生成 × 电影感CG工作流 × 不需要专业知识的民主化',
+    conversionSignal:'有；明确提及Meshy赞助合作并附简介栏链接，引导免费试用',
+    replicability:'中；工具流程可复制，但需具备Blender基础操作能力，完整制作门槛仍存在',
+    brandAdaptation:'3D打印品牌或AI工具平台可改编为：用AI生成商品3D模型 > 一键上色贴图 > 输出产品展示动画，强调零建模技术即可制作专业产品视觉',
+    keywords:'AI 3D模型生成、Meshy、Blender、PBR纹理、电影感CG',
+    reusableFormula:'先展示震撼成品 > 揭露「其实是AI制作」> 逐步演示工具流程 > 强调零专业门槛也能做到 > 引导试用',
+    scores:{hook:8,visual:7,emotion:7,retention:8,conversion:7,viral:7},
+    summary:'以电影级CG成品先行吸睛，再拆解AI工具Meshy全流程，打破3D制作专业门槛的教学型业配内容'
+  },
+  {
+    name:'とりピコ / Unreal Engine ゲーム制作',region:'JP',platform:'YT Long',month:'2026年04月',
+    url:'https://www.youtube.com/watch?v=dWszU5HhFj4',
+    publishDate:'2026-04-29',
+    kolName:'とりピコ ⧸ Unreal Engine ゲーム制作',
+    category:'AI工具',
+    hookType:'痛点型',
+    hookContent:'面向不擅长3D建模、想节省时间的游戏开发者介绍AI工具',
+    first3Sec:'直接点名三类目标受众痛点，让观众立即判断内容是否与自己相关，强化留存动机',
+    structure:'痛点点名 > 工具介绍与功能概览 > 文本生成3D模型实演 > 图像生成3D模型实演 > 自动绑定实演 > 导入 Unreal Engine 实演 > 免费行动号召',
+    visualReward:'苹果3D模型从线框到贴图完成，以及角色模型自动绑骨后在Unreal Engine中实际播放动画',
+    ctaType:'试用',
+    ctaContent:'请通过简介栏链接免费试用／有3周年纪念活动福利',
+    painPoint:'3D模型制作需要时间、成本与专业知识，构成游戏开发的门槛',
+    emotionMechanism:'好奇',
+    emotionDistribution:'好奇50%+惊喜30%+成就感20%',
+    viralFormula:'游戏开发者痛点 × AI数分钟完成3D模型制作 × Unreal Engine实机运行确认',
+    conversionSignal:'有；视频中段插入3周年活动告知，结尾强调免费＋简介栏链接，具备明确导流意图',
+    replicability:'高 + 工具操作步骤清晰，任何AI工具教学均可套用相同结构：痛点切入>功能展示>实操演示>导出整合>行动号召',
+    brandAdaptation:'3D打印或AI设计工具品牌可套用相同结构：点名创作者/开发者痛点，展示从零到成品的完整流程，结尾搭配免费试用或限时优惠行动号召',
+    keywords:'Meshy AI、3D模型生成、游戏开发、自动绑定、Unreal Engine',
+    reusableFormula:'「不擅长某项工作／想节省时间的人必看」→ AI工具功能介绍 → 分步骤实演 → 实机确认 → 免费行动号召',
+    scores:{hook:7,visual:7,emotion:6,retention:8,conversion:8,viral:7},
+    summary:'以游戏开发者的3D模型制作成本与时间痛点为起点，用步骤实演展示 Meshy AI 全流程的高完播率教学型推广视频'
+  },
+  {
+    name:'りくらぼ / RikuLab',region:'JP',platform:'YT Shorts',month:'2026年04月',
+    url:'https://www.youtube.com/shorts/_jxnHfO6p18',
+    publishDate:'2026-04-17',
+    kolName:'りくらぼ ⧸ RikuLab',
+    category:'3D打印 - 搞笑创意',
+    hookType:'悬念型',
+    hookContent:'用妻子的嘴型硅胶模具制作吹泡泡装置，让妻子「吐泡泡」',
+    first3Sec:'开头直接抛出恶趣味悬念：「能让老婆吐泡沫吗？」搭配牛奶倒入镜头制造视觉吸引，瞬间引发好奇',
+    structure:'恶趣味悬念提问 > AI工具生成3D唇型 > 3D打印制作模具 > 树脂抛光表面处理 > 矽胶翻模浇注 > 成品组装 > 当著老婆面使用 > 意外温馨结局反转',
+    visualReward:'矽胶翻模完成的逼真嘴唇模具成品，以及当著老婆面吹泡泡的实际使用画面与结局反转',
+    ctaType:'试用',
+    ctaContent:'推广Meshy AI三周年一美元优惠活动，呼吁观众去玩看看',
+    painPoint:'想整蛊老婆又找不到创意方法，用3D打印+AI实现恶趣味小发明',
+    emotionMechanism:'搞笑',
+    emotionDistribution:'搞笑60%+好奇30%+惊喜10%',
+    viralFormula:'老婆照片 × AI生成3D模型+矽胶翻模 × 恶趣味整蛊装置反转温馨',
+    conversionSignal:'有；视频中明确口播推广Meshy AI三周年一美元优惠，属于商业合作植入',
+    replicability:'高；流程清晰可拆解：AI建模→3D打印→矽胶翻模→组装应用，任何人物照片均可替换复制',
+    brandAdaptation:'3D打印品牌或AI建模工具可直接套用此公式，将品牌LOGO或产品外型制成矽胶模具，结合恶趣味或礼物场景推广',
+    keywords:'3D打印、硅胶模具、Meshy AI、妻子、泡泡',
+    reusableFormula:'用某人照片 × AI生成3D模型 × 实体翻模制作 × 出乎意料的恶趣味或感人用途',
+    scores:{hook:9,visual:7,emotion:8,retention:9,conversion:7,viral:8},
+    summary:'以恶趣味悬念Hook驱动完播，AI工具植入自然，矽胶翻模过程清晰，结局反转强化情绪共鸣'
+  },
+  {
+    name:'ハズム',region:'JP',platform:'Instagram',month:'2026年03月',
+    url:'https://www.instagram.com/dan_hazumu/reel/DV0Z-VJkdeK/',
+    publishDate:'2026-03-13',
+    kolName:'ハズム',
+    category:'3D打印 - 教程干货',
+    hookType:'结果先行型',
+    hookContent:'展示火影忍者大师风格3D模型的开场场景',
+    first3Sec:'开场直接展示动手操作与Naruto手办背景，视觉上动态感强，吸引动漫收藏族群停留',
+    structure:'成品预览 > 工具介绍（Meshy AI）> 功能卖点说明 > 制作主题揭示（骷髅背景）> 折扣行动号召',
+    visualReward:'多层Naruto手办陈列架搭配创作者实际操作，展示AI生成3D模型的实际应用场景',
+    ctaType:'试用',
+    ctaContent:'新注册享50% 折扣，请一定试试看',
+    painPoint:'想制作个性化3D模型背景但建模门槛高，AI工具一键解决',
+    emotionMechanism:'好奇',
+    emotionDistribution:'好奇60%+惊喜30%+成就感10%',
+    viralFormula:'动漫收藏展示 × AI文字生成3D模型 × 个性化场景布置',
+    conversionSignal:'有；明确提及Meshy AI品牌名、新用户50%折扣优惠，属强转化信号',
+    replicability:'高；工具操作流程固定，主题可替换（换成不同IP或场景），适合批量复制',
+    brandAdaptation:'3D打印品牌或AI设计工具可套用此格式：展示具体IP或场景成品，搭配工具演示+限时优惠，针对动漫/游戏社群投放',
+    keywords:'Meshy AI、3D模型、火影忍者、文本生成、头骨',
+    reusableFormula:'用【AI工具名】+【文字输入】+【特定主题3D成品展示】+【限时优惠行动号召】打造工具种草短片',
+    scores:{hook:6,visual:7,emotion:6,retention:6,conversion:8,viral:6},
+    summary:'以Naruto手办场景为视觉锚点，植入Meshy AI工具演示与折扣行动号召，典型付费推广种草结构',
+    crossPlatform:true,analysisSource:'cross_platform_same_month'
+  },
+  {
+    name:'ミコンスキー🦊',region:'JP',platform:'Instagram',month:'2026年02月',
+    url:'https://www.instagram.com/reels/DVV4XLjk_13/',
+    publishDate:'2026-02-28',
+    kolName:'ミコンスキー🦊',
+    category:'AI工具',
+    hookType:'悬念型',
+    hookContent:'用「没有建模也做出来了」这一反常识宣言立刻激发观众疑问',
+    first3Sec:'先展示完成CG，同时说「没有建模」，用矛盾表述让观众想问「为什么？」并防止流失',
+    structure:'先展示完成影像 > 用无需建模宣言激发疑问 > AI工具介绍（Meshy AI）> 2D插画→3D化实演 > 纹理、动画、图像生成功能介绍 > Blender布置与打光 > After Effects收尾 > 成品对比 > 行动号召',
+    visualReward:'从1张2D插画生成带低模与纹理的3D模型的瞬间，以及最终CG影像的完成画面',
+    ctaType:'评论',
+    ctaContent:'请从简介栏试用 Meshy AI；也欢迎在评论里告诉我感想',
+    painPoint:'对3DCG感兴趣但因建模太难而挫败的人，可以一次性跨过这道门槛',
+    emotionMechanism:'好奇心',
+    emotionDistribution:'好奇60%+惊喜30%+成就感10%',
+    viralFormula:'1张2D插画 × AI自动3D化 × 专业级CG影像完成的落差',
+    conversionSignal:'有；简介栏链接导流＋标注品牌赞助（Meshy AI）',
+    replicability:'高；使用工具明确、步骤可复现，素材也可通过AI生成完成，进入门槛低',
+    brandAdaptation:'3D打印品牌或教育类SaaS可将同结构用于「把你的插画直接商品化」的诉求，也可迁移到商品视觉制作降本',
+    keywords:'Meshy AI、无需建模、AI生成3D、Blender、CG影像',
+    reusableFormula:'「不做某事也完成了」先展示成品 → 揭示真相并介绍AI工具 → 全流程实演 → 成品对比后行动号召',
+    scores:{hook:9,visual:8,emotion:8,retention:8,conversion:7,viral:8},
+    summary:'用「无需建模」的反常识Hook最大化好奇心，通过实演AI工具全功能降低新手进入门槛的教育型商业视频',
+    crossPlatform:true,analysisSource:'cross_platform_same_month'
+  },
+  {
+    name:'匠のガジェットレビュー',region:'JP',platform:'YT Long',month:'2026年05月',
+    url:'https://www.youtube.com/watch?v=NA1clpPkUtw',
+    publishDate:'2026-05-20',
+    kolName:'匠のガジェットレビュー',
+    category:'AI工具',
+    hookType:'悬念型',
+    hookContent:'虽然是商业合作，但坦白说——我试了AI 3D建模，结果并不顺利',
+    first3Sec:'用「坦白说」这一反常识商业合作告白建立信任感，并通过失败预告促使继续观看',
+    structure:'商业合作告白与失败预告 > 工具概要说明 > 成功案例（遥控器外壳）> 连续失败案例（手机、手表）> 发现突破口（手办）> 成功结果展示 > 诚实总评 > 价格说明 > 行动号召',
+    visualReward:'5个关键帧将3D打印完成的黑色外壳与实机手机并列，直接展示实物成质量感',
+    ctaType:'点击',
+    ctaContent:'请从简介栏链接查看 Meshy AI，有100积分免费版；也欢迎订阅频道和点赞',
+    painPoint:'3D建模软件太难导致新手挫败，想验证AI是否能节省时间',
+    emotionMechanism:'好奇',
+    emotionDistribution:'好奇50%+共鸣30%+惊喜20%',
+    viralFormula:'诚实商业评测 × 失败→成功的实验过程 × 3D打印成品实物反差',
+    conversionSignal:'有；通过简介栏链接导流＋免费方案诉求＋价格细节说明，目标是推动购买转化',
+    replicability:'高；失败→成功的实验结构＋诚实评测形式通用性高，可直接迁移到其他AI工具或3D打印题材',
+    brandAdaptation:'3D打印服务或AI设计工具品牌可将其作为「新手实际试用，从失败到成功」的真实体验型广告；诚实评价能提高可信度并刺激购买意愿',
+    keywords:'3D建模、Meshy AI、3D打印、手办、节省时间',
+    reusableFormula:'「虽然是商业合作但坦白说」＋连续失败实验＋发现突破口＋实物成品展示＋价格行动号召',
+    scores:{hook:8,visual:6,emotion:7,retention:8,conversion:7,viral:7},
+    summary:'通过商业合作告白＋诚实失败报告获取信任，再以成功体验收尾，自然引出对AI工具的购买意愿'
+  },
+  {
+    name:'麦茶の逸般人工作室',region:'JP',platform:'YT Long',month:'2025年11月',
+    url:'https://www.youtube.com/watch?v=BydQF47CriM',
+    publishDate:'2025-11-28',
+    kolName:'麦茶の逸般人工作室',
+    category:'3D打印 - 实用小物',
+    hookType:'结果先行型',
+    hookContent:'公开只需输入文本即可完成3D手办的震撼流程',
+    first3Sec:'从AI服务介绍迅速进入文本→3D模型生成流程，早期植入对视觉成品的期待',
+    structure:'提出问题（图像生成麻烦）> AI工具介绍（Meshy AI）> 文本生成实演 > 数据处理与导出 > 向外部3D打印服务下单 > 开箱与成品展示 > 冷静评价与总结 > 行动号召',
+    visualReward:'开箱场景中出现红黑色液压挖掘机手办，并将3D数据与实物并列对比，形成最大视觉冲击',
+    ctaType:'关注',
+    ctaContent:'导流到 YouTube 频道，并用「下次见」促进持续观看',
+    painPoint:'无需建模，也无需调试3D打印机，新手也能制作手办的低门槛需求',
+    emotionMechanism:'惊喜',
+    emotionDistribution:'好奇50%+惊喜40%+成就感10%',
+    viralFormula:'一行文本 × AI自动生成3D模型 × 全彩3D打印实体化的冲击',
+    conversionSignal:'有；详细说明 JLC3DP 下单流程，并介绍 Meshy AI 价格方案，形成明确转化导流',
+    replicability:'高；文本输入→Meshy AI→JLC3DP 的清晰工作流，任何人都能复现',
+    brandAdaptation:'3D打印服务或AI工具品牌可作为赞助方介入，将特定主题（宠物、职业、兴趣）手办化流程用于商品诉求',
+    keywords:'Meshy AI、文本生成3D模型、3D打印、手办化、JLC3DP',
+    reusableFormula:'围绕「用一行文本输入某主题→AI生成→实体手办完成」这一新手也能复现的惊喜体验构建内容',
+    scores:{hook:7,visual:8,emotion:7,retention:8,conversion:7,viral:7},
+    summary:'通过只输入文本就能制作3D手办的体验，验证AI工具×3D打印服务组合的低门槛与惊喜感的教程型内容'
+  },
+  {
+    name:'깡쓰 TV',region:'KR',platform:'YT Long',month:'2026年04月',
+    url:'https://www.youtube.com/watch?v=IeAkaavBBFc',
+    publishDate:'2026-04-17',
+    kolName:'깡쓰TV',
+    category:'AI工具',
+    hookType:'悬念型',
+    hookContent:'这有点震撼——格局正在被改变，文字生成3D模型直接可用',
+    first3Sec:'以「有点震撼」制造认知冲击，搭配高质量3D角色模型视觉，快速建立AI工具的可信度与好奇心',
+    structure:'震撼Hook > 工具介绍+版本升级公告 > 促销行动号召植入 > Meshy AI三大核心升级功能拆解 > 基础操作示范（图生3D/文生3D/Rigging） > 进阶功能补充 > 个人使用心得背书 > 最终行动号召导流',
+    visualReward:'帧4-5中角色转向展示肌肉结构、羽翼细节与服装质感，完整呈现Meshy 6高精度3D模型的视觉冲击力',
+    ctaType:'点击',
+    ctaContent:'点击更多栏或留言区专属链接，以1500韩元（约一杯美式咖啡价格）获取Pro会员资格，限时新用户专属优惠',
+    painPoint:'3D建模门槛高、耗时长，AI初学者无法直接产出实用级质量作品',
+    emotionMechanism:'好奇',
+    emotionDistribution:'好奇60%+惊喜25%+成就感15%',
+    viralFormula:'文字/图片输入 × 秒级生成高质量3D模型 × 直接可用于游戏/动画/视频制作',
+    conversionSignal:'有；明确植入限时促销（1500韩元Pro会员）、专属链接导流、3周年活动期限压迫感三重转化信号',
+    replicability:'高；工具评测+功能拆解+限时优惠的结构高度标准化，可直接套用于任何AI工具推广内容',
+    brandAdaptation:'3D打印品牌可将Meshy生成流程与自家印表机结合，展示「AI生成模型→一键切片→实体成品」完整链路，强化从数字到实体的价值主张',
+    keywords:'Meshy AI、3D模型生成、Rigging动作绑定、低多边形优化、游戏开发工具',
+    reusableFormula:'震撼开场揭示痛点 × 版本升级三大亮点拆解 × 真实操作示范降低门槛 × 限时优惠制造紧迫感导流',
+    scores:{hook:8,visual:8,emotion:7,retention:7,conversion:9,viral:8},
+    summary:'以震撼Hook+版本升级三大亮点+真实操作示范构建信任，搭配限时低价行动号召实现高效AI工具推广转化'
+  },
+  {
+    name:'Bottle Design Lab',region:'KR',platform:'YT Shorts',month:'2025年12月',
+    url:'https://www.youtube.com/shorts/6sosrtx-fq8',
+    publishDate:'2025-12-15',
+    kolName:'보틀 디자인랩 Bottle Design Lab',
+    category:'AI工具',
+    hookType:'悬念型',
+    hookContent:'只用产品照片就能生成3D模型？颠覆认知的开场',
+    first3Sec:'直接抛出「产品照片→3D模型」的惊人可能性，搭配萤幕上已完成的3D沙发成品，视觉与口播同步冲击',
+    structure:'痛点提问 > 工具介绍（Meshy AI）> 操作流程说明 > 成品展示 > 应用场景点明 > 工作流痛点共鸣 > 实用行动号召（OBJ导入教学）> 免费资源放送',
+    visualReward:'萤幕上色彩鲜艳的条纹扶手椅3D模型从无到有完整呈现，配合GeForce RTX高端设备强化可信度',
+    ctaType:'试用',
+    ctaContent:'下载免费Ruby插件，用OBJ Importer在SketchUp中导入AI生成模型',
+    painPoint:'SketchUp找家具模型耗时费力，AI工具可10分钟内完成建模+贴图',
+    emotionMechanism:'惊喜',
+    emotionDistribution:'好奇50%+惊喜30%+成就感20%',
+    viralFormula:'产品图片 × AI秒生3D模型 × SketchUp实际可用',
+    conversionSignal:'有；提供创作者自制免费Ruby插件，引导下载使用，具备明确导流动作',
+    replicability:'高；流程标准化（图片输入→AI生成→OBJ导出→SketchUp导入），任何人可照做',
+    brandAdaptation:'家具品牌或室内设计软件可借此格式展示：上传自家产品图→AI生成3D→放入设计场景，突出「所见即所得」的选品体验',
+    keywords:'Meshy AI、SketchUp、3D建模、AI工具、室内设计',
+    reusableFormula:'「你还在花X小时做Y？其实只要一张图+这个AI工具，10分钟搞定」',
+    scores:{hook:8,visual:7,emotion:7,retention:8,conversion:8,viral:8},
+    summary:'以「产品照片秒变3D模型」为钩，精准打中SketchUp设计师痛点，免费工具作为转化诱饵'
+  },
+  {
+    name:'타임리스',region:'KR',platform:'YT Long',month:'2026年03月',
+    url:'https://www.youtube.com/watch?v=dpc9VixvDEs',
+    publishDate:'2026-03-14',
+    kolName:'타임리스',
+    category:'综合',
+    hookType:'悬念型',
+    hookContent:'与禁欲僧人一起的极乐……往生？与禁欲僧人的奇妙同行',
+    first3Sec:'标题本身以强烈矛盾修辞（禁欲×极乐往生）刺激好奇心，99.4万评论数值同时制造可信度和疑问',
+    structure:'标题露出（矛盾设定）> 情境展开（僧人角色登场）> 连续意外反应 > 制造混乱与笑点 > 重复行动号召',
+    visualReward:'所有画面都由同一个标题画面构成，无法确认实际视觉回报点',
+    ctaType:'评论',
+    ctaContent:'用99.4万评论数值间接引导评论参与',
+    painPoint:'宗教权威与世俗欲望冲突所带来的禁忌式好奇',
+    emotionMechanism:'好奇',
+    emotionDistribution:'好奇60%+搞笑30%+惊喜10%',
+    viralFormula:'禁欲角色 × 世俗情境 × 反转反应',
+    conversionSignal:'弱；虽然有99.4万评论数值作为参与诱导信号，但没有直接购买/点击行动号召',
+    replicability:'中；角色设定与矛盾概念可复制，但对角色独特性的依赖较高',
+    brandAdaptation:'可赋予品牌角色「禁欲」或「原则主义者」设定，再通过被品牌产品诱惑的反转情节，喜剧化传达产品吸引力',
+    keywords:'禁欲、僧人、极乐、诱惑、修行',
+    reusableFormula:'严格原则型角色 × 意外世俗情境 × 连续反转反应 = 共鸣+笑点爆发',
+    scores:{hook:8,visual:2,emotion:7,retention:6,conversion:3,viral:6},
+    summary:'用禁欲×极乐的矛盾设定最大化好奇心的角色型搞笑内容策略'
+  },
+  {
+    name:'東京九段工作ラボ',platform:'YT Shorts',month:'2025年08月',
+    url:'https://www.youtube.com/shorts/WrcuxW2PYuE',
+    publishDate:'2025-08-28',
+    category:'AI工具',
+    hookType:'悬念型',
+    hookContent:'AI 可以把恐龙世界以 3D 形式召唤出来',
+    first3Sec:'直接以博物館巨型恐龍骨骼化石特寫開場，視覺衝擊強烈，疊加「AI召喚恐龍3D世界」文字勾起強烈好奇心',
+    structure:'視覺震撼開場（恐龍骨骼特寫）> 文字懸念拋出（AI+3D召喚）> 鏡頭環繞骨骼遊走 > 暗示後續AI生成內容 > 結尾感謝收看',
+    visualReward:'博物館實體恐龍骨骼化石超近景環繞鏡頭，配合「AI召喚3D世界」標題形成強烈現實與科技反差感',
+    ctaType:'其他',
+    ctaContent:'感謝觀看（無明確行動號召）',
+    painPoint:'普通人無法親眼看到活恐龍，AI+3D技術讓這件事變為可能',
+    emotionMechanism:'好奇',
+    emotionDistribution:'好奇65%+驚喜35%',
+    viralFormula:'博物館真實骨骼 × AI 3D復原技術 × 科技讓歷史復活反差',
+    conversionSignal:'無',
+    replicability:'中；需要博物館實拍素材+AI 3D生成工具，概念易複製但執行需一定資源',
+    brandAdaptation:'3D打印或AI工具品牌可改編為：掃描博物館展品→AI生成3D模型→實際打印成品，完整展示從現實到數字到實體的科技鏈路',
+    keywords:'AI、恐龍、3D、召喚、博物館',
+    reusableFormula:'用【真實場景素材】+【AI工具】+【震撼結果】三段式結構，製造「科技讓不可能成真」的強烈反差爆款',
+    scores:{hook:8,visual:7,emotion:6,retention:6,conversion:3,viral:6},
+    summary:'以博物館恐龍骨骼實拍製造視覺震撼，疊加AI 3D召喚概念引發強烈好奇，但缺乏完整成果展示與明確行動號召，轉化力偏弱'
+  },
+  {
+    name:'東京九段工作ラボ',platform:'Instagram',month:'2026年04月',
+    url:'https://www.instagram.com/reel/DXbZMwxEvCA/',
+    publishDate:'2026-04-21',
+    category:'3D打印 - 教程干货',
+    hookType:'数字型',
+    hookContent:'一句話輸入3D AI，3D打印成品，影片獲185萬次播放',
+    first3Sec:'直接拋出185萬播放數字製造信任感，再承諾今天教你從零複製這個成果，強力留住好奇用戶',
+    structure:'成果數字引爆 > 痛點共鳴（不知道怎麼輸入prompt）> 工具介紹（Meshy AI）> 步驟教學（文字→圖像→3D→打印）> 實物成品展示對比 > 限時優惠行動號召 > 訂閱行動號召',
+    visualReward:'五幀均為高質感暴龍3D渲染實物展示，肌膚紋理與皺折細節極度逼真，視覺衝擊力強烈',
+    ctaType:'購買',
+    ctaContent:'期間限定1美元體驗Meshy Pro方案，簡介欄連結點擊註冊',
+    painPoint:'想用3D AI造物卻不知道怎麼寫prompt，卡在第一步無從下手',
+    emotionMechanism:'好奇',
+    emotionDistribution:'好奇50%+成就感30%+驚喜20%',
+    viralFormula:'185萬播放數字錨定 × Meshy Prompt Helper降低門檻 × 實體3D打印成品反差',
+    conversionSignal:'有；明確說明1美元限時優惠並附簡介欄專屬連結，具強烈轉化導流設計',
+    replicability:'高；流程標準化（工具選定→prompt生成→3D輸出→打印），任何創作主題均可套用相同結構',
+    brandAdaptation:'3D打印品牌或AI工具品牌可替換主角（如手辦、建築模型），保留數字Hook+痛點共鳴+步驟拆解+實物成品結構，加入自家產品限時優惠作結尾轉化',
+    keywords:'3D生成AI、Meshy、3D打印、提示詞、霸王龍',
+    reusableFormula:'用一句爆款數字開場 > 拆解初學者最卡的一個步驟 > 工具手把手示範 > 實物成品震撼收尾 > 限時優惠轉化',
+    scores:{hook:9,visual:8,emotion:7,retention:8,conversion:9,viral:8},
+    summary:'以185萬播放數字錨定信任，透過Prompt痛點共鳴與步驟拆解驅動完播，實物成品展示強化爆款潛力並精準導流付費轉化'
   }
 ];
 
@@ -2728,7 +3008,6 @@ const ORGANIC_CASES = [
   {name:'プッカ / pukka_japan',country:'JP',platform:'Instagram',date:'2025年08月',views:208000,viewsFmt:'208K',cpm:7.69,cat:'3D Print',catSub:'Funny & Creative',url:'https://www.instagram.com/reel/DNHJdLhpVcg/'},
   {name:'プッカ / pukka_japan',country:'JP',platform:'Instagram',date:'2025年12月',views:1518864,viewsFmt:'1.5M',cpm:2.3,cat:'3D Print',catSub:'Funny & Creative',url:'https://www.instagram.com/reel/DSLpDgkgcR-/'},
   {name:'𝕞𝕒𝕞𝕒𝕔𝕒✿3Dワークショップ講師',country:'JP',platform:'Instagram',date:'2025年12月',views:349300,viewsFmt:'349K',cpm:1.29,cat:'3D Print',catSub:'Emotional Gifts',url:'https://www.instagram.com/mariko_mamaca/reel/DSRyH-eEqM-/'},
-  {name:'クリプトハスキー',country:'JP',platform:'YT Long',date:'2026年03月',views:30317,viewsFmt:'30K',cpm:26.39,cat:'General',catSub:'General AI',url:'https://www.youtube.com/watch?v=tavJyKAMDmU'},
   {name:'りくらぼ / RikuLab',country:'JP',platform:'YT Shorts',date:'2026年03月',views:1566601,viewsFmt:'1.6M',cpm:1.53,cat:'3D Print',catSub:'Funny & Creative',url:'https://youtube.com/shorts/ISSYX1cG3Wg'},
   {name:'ハズム',country:'JP',platform:'Instagram',date:'2026年03月',views:46682,viewsFmt:'47K',cpm:38.56,cat:'3D Print',catSub:'Emotional Gifts',url:'https://www.instagram.com/dan_hazumu/reel/DV0Z-VJkdeK/'},
   {name:'ミコンスキー🦊',country:'JP',platform:'Instagram',date:'2026年02月',views:193190,viewsFmt:'193K',cpm:3.11,cat:'VFX & 3DCG',catSub:'VFX & 3DCG',url:'https://www.instagram.com/reels/DVV4XLjk_13/'},
@@ -2738,11 +3017,10 @@ const ORGANIC_CASES = [
   {name:'もりた | ３Dでハンドメイド素材制作',country:'JP',platform:'Instagram',date:'2026年02月',views:3400000,viewsFmt:'3.4M',cpm:0.0,cat:'3D Print',catSub:'Emotional Gifts',url:'https://www.instagram.com/dotkit2015/reel/DUcT9d1CSNU/'},
   {name:'3Dにゃん',country:'JP',platform:'Instagram',date:'2026年02月',views:2300000,viewsFmt:'2.3M',cpm:0.24,cat:'Interior Design',catSub:'Interior Design',url:'https://www.instagram.com/reel/DUdEMuFE9HO/'},
   {name:'しげと | iPhone・ガジェット活用術',country:'JP',platform:'Instagram',date:'2026年02月',views:221682,viewsFmt:'222K',cpm:3.61,cat:'General',catSub:'General AI',url:'https://www.instagram.com/reels/DUkkwqFEvj4/'},
-  {name:'3Dプリンター副業リーマン',country:'JP',platform:'Instagram',date:'2026年03月',views:113081,viewsFmt:'113K',cpm:5.31,cat:'3D Print',catSub:'Emotional Gifts',url:'https://www.instagram.com/'},
+  {name:'3Dプリンター副業リーマン',country:'JP',platform:'Instagram',date:'2026年03月',views:97802,viewsFmt:'98K',cpm:2.25,cat:'3D Print',catSub:'Practical Gadgets',url:'https://www.instagram.com/kobahii3d/reel/DVvc-wskf-5/'},
   {name:'98hobby',country:'JP',platform:'Instagram',date:'2026年01月',views:134252,viewsFmt:'134K',cpm:2.23,cat:'3D Print',catSub:'Practical Gadgets',url:'https://www.instagram.com/create_hobby98/reel/DT2RRwcEly2/'},
   {name:'airi｜100均DIY×便利グッズ',country:'JP',platform:'Instagram',date:'2026年01月',views:303450,viewsFmt:'303K',cpm:2.64,cat:'3D Print',catSub:'Emotional Gifts',url:'https://www.instagram.com/i_house.8/reel/DUKbSAcEmpt/'},
   {name:'ものこと⌇ガジェットに囲まれた暮らし',country:'JP',platform:'Instagram',date:'2026年01月',views:561796,viewsFmt:'562K',cpm:0.53,cat:'3D Print',catSub:'Practical Gadgets',url:'https://www.instagram.com/room___room___room/reel/DT2H7VBk_W7/'},
-  {name:'クリプトハスキー',country:'JP',platform:'YT Long',date:'2026年01月',views:433640,viewsFmt:'434K',cpm:1.84,cat:'General',catSub:'General AI',url:'https://www.youtube.com/watch?v=KjJvLcwAqkI'},
   {name:'airi｜100均DIY×便利グッズ',country:'JP',platform:'Instagram',date:'2025年12月',views:226174,viewsFmt:'226K',cpm:2.43,cat:'3D Print',catSub:'Practical Gadgets',url:'https://www.instagram.com/reels/DSeeeUVEp5Q/'},
   {name:'東京九段工作ラボ',country:'JP',platform:'Instagram',date:'2025年12月',views:123716,viewsFmt:'124K',cpm:1.21,cat:'3D Print',catSub:'Tutorials & Tips',url:'https://www.instagram.com/reel/DScAb48EfHD/'},
   {name:'generativeartstudio',country:'JP',platform:'Instagram',date:'2026年01月',views:257221,viewsFmt:'257K',cpm:0.97,cat:'3D Print',catSub:'Emotional Gifts',url:'https://www.instagram.com/reel/DTpRZ7QAdZR/'},
@@ -2758,7 +3036,7 @@ const ORGANIC_CASES = [
   {name:'airi｜100均DIY×便利グッズ',country:'JP',platform:'Instagram',date:'2026年05月',views:365500,viewsFmt:'366K',cpm:3.28,cat:'3D Print',catSub:'Emotional Gifts',url:'https://www.instagram.com/shinkichi.gadget/reel/DW8xA2-jIXX/'},
   {name:'Laye | 3D print',country:'JP',platform:'Instagram',date:'2026年04月',views:1700000,viewsFmt:'1.7M',cpm:1.06,cat:'3D Print',catSub:'Funny & Creative',url:'https://www.instagram.com/laye_3d/reel/DXLyVlZETdu/'},
   {name:'Laye | 3D print',country:'JP',platform:'Instagram',date:'2026年03月',views:578400,viewsFmt:'578K',cpm:2.07,cat:'3D Print',catSub:'Funny & Creative',url:'https://www.instagram.com/laye_3d/reel/DV79QojkXWg/'},
-  {name:'Laye | 3D print',country:'JP',platform:'Instagram',date:'2026年04月',views:1600000,viewsFmt:'1.6M',cpm:1.13,cat:'3D Print',catSub:'Funny & Creative',url:'https://www.instagram.com/laye_3d/reel/DXgZw9nESQq/'},
+  {name:'Laye | 3D print',country:'JP',platform:'Instagram',date:'2026年04月',views:1600000,viewsFmt:'1.6M',cpm:1.12,cat:'3D Print',catSub:'Funny & Creative',url:'https://www.instagram.com/laye_3d/reel/DXgZw9nESQq/'},
   {name:'sumaCG',country:'JP',platform:'Instagram',date:'2026年03月',views:530100,viewsFmt:'530K',cpm:0.15,cat:'Interior Design',catSub:'Interior Design',url:'https://www.instagram.com/3dcg_suma/reel/DWLyTOgDoST/'},
   {name:'mAIsami | 1cm未満専門3Dクリエイター',country:'JP',platform:'Instagram',date:'2026年03月',views:354500,viewsFmt:'355K',cpm:1.13,cat:'3D Print',catSub:'Emotional Gifts',url:'https://www.instagram.com/maisami3d/reel/DWToakEEchp/'},
   {name:'3DAndy廃墟で3Dプリント',country:'JP',platform:'Instagram',date:'2026年03月',views:111200,viewsFmt:'111K',cpm:3.6,cat:'3D Print',catSub:'Funny & Creative',url:'https://www.instagram.com/will_bottle_open/reel/DV6H-71AWNS/'},
@@ -2766,6 +3044,7 @@ const ORGANIC_CASES = [
   {name:'Mina | 3D print',country:'JP',platform:'Instagram',date:'2026年05月',views:243900,viewsFmt:'244K',cpm:4.92,cat:'3D Print',catSub:'Practical Gadgets',url:'https://www.instagram.com/mina_3dprint/reel/DYhLJruBirZ/'},
   {name:'Printiq',country:'JP',platform:'Instagram',date:'2026年05月',views:876300,viewsFmt:'876K',cpm:1.83,cat:'3D Print',catSub:'Practical Gadgets',url:'https://www.instagram.com/printiq__3d/reel/DY1YrtOpYt3/'},
   {name:'東京九段工作ラボ',country:'JP',platform:'YT Long',date:'2026年04月',views:5864,viewsFmt:'6K',cpm:51.16,cat:'3D Print',catSub:'Tutorials & Tips',url:'https://www.youtube.com/watch?v=nFaUwZ64FSk'},
+  {name:'東京九段工作ラボ',country:'JP',platform:'Instagram',date:'2026年04月',views:0,viewsFmt:'—',cpm:0,cat:'3D Print',catSub:'Tutorials & Tips',url:'https://www.instagram.com/reel/DXbZMwxEvCA/'},
   {name:'e3D',country:'JP',platform:'YT Long',date:'2026年02月',views:2359,viewsFmt:'2K',cpm:50.87,cat:'Interior Design',catSub:'Interior Design',url:'https://youtu.be/OOhiReoleVA'},
   {name:'麦茶の逸般人工作室',country:'JP',platform:'YT Long',date:'2025年11月',views:4773,viewsFmt:'5K',cpm:37.71,cat:'3D Print',catSub:'Tutorials & Tips',url:'https://www.youtube.com/watch?v=BydQF47CriM'},
   {name:'AobecoArt',country:'JP',platform:'YT Long',date:'2026年05月',views:131,viewsFmt:'131',cpm:381.68,cat:'Interior Design',catSub:'Interior Design',url:'https://www.youtube.com/watch?v=1XyJHwQKaGQ'},
@@ -3043,7 +3322,7 @@ const KOL_TABLE=[
   {name:'zozi009(studio sleipnir)',region:'JP',platform:'YouTube Shorts',month:'2026年4月',views:0,spend:0.00,cpm:0.0000},
   {name:'98hobby',region:'JP',platform:'Instagram',month:'2026年4月',views:183154,spend:150.00,cpm:0.8200},
   {name:'CG box',region:'JP',platform:'YouTube Long',month:'2026年4月',views:1136,spend:0.00,cpm:0.0000},
-  {name:'Laye | 3D print',region:'JP',platform:'Instagram',month:'2026年4月',views:3122631,spend:1600.00,cpm:0.5100},
+  {name:'Laye | 3D print',region:'JP',platform:'Instagram',month:'2026年4月',views:3122631,spend:3600.00,cpm:1.1529},
   {name:'Printiq',region:'JP',platform:'Instagram',month:'2026年4月',views:904637,spend:1800.00,cpm:1.9900},
   {name:'YAMATO CRYPTO | ヤマト',region:'JP',platform:'YouTube Long',month:'2026年4月',views:120793,spend:900.00,cpm:7.4500},
   {name:'airi｜100均DIY×便利グッズ',region:'JP',platform:'Instagram',month:'2026年4月',views:1912090,spend:1800.00,cpm:0.9400},
@@ -3055,7 +3334,6 @@ const KOL_TABLE=[
   {name:'りくらぼ / RikuLab',region:'JP',platform:'YouTube Shorts',month:'2026年4月',views:3446965,spend:2400.00,cpm:0.7000},
   {name:'りぶ｜収納と低コストDIYで、暮らしと家族を整える🛠',region:'JP',platform:'Instagram',month:'2026年4月',views:45840,spend:400.00,cpm:8.7300},
   {name:'クリプトトレイン / CRYPTO TRAIN',region:'JP',platform:'YouTube Long',month:'2026年4月',views:27794,spend:0.00,cpm:0.0000},
-  {name:'クリプトハスキー',region:'JP',platform:'YouTube Long',month:'2026年4月',views:123146,spend:233.34,cpm:1.8900},
   {name:'シンきちのガジェット紹介',region:'JP',platform:'YouTube Shorts',month:'2026年4月',views:93353,spend:900.00,cpm:9.6400},
   {name:'リーダークリプト Leader of Crypto',region:'JP',platform:'YouTube Long',month:'2026年4月',views:112154,spend:900.00,cpm:8.0200},
   {name:'東京九段工作ラボ',region:'JP',platform:'YouTube Long',month:'2026年4月',views:20900,spend:0.00,cpm:0.0000},
@@ -3067,9 +3345,9 @@ const KOL_TABLE=[
   {name:'トト／Blender0→1 の人',region:'JP',platform:'Twitter/X',month:'2026年3月',views:25403,spend:200.00,cpm:7.8700},
   {name:'3DAndy廃墟で3Dプリント',region:'JP',platform:'Instagram',month:'2026年3月',views:12581,spend:120.00,cpm:9.5400},
   {name:'3DCG-仮想現実系YouTuber',region:'JP',platform:'YouTube Long',month:'2026年3月',views:5669,spend:70.00,cpm:12.3500},
-  {name:'3Dプリンター副業リーマン',region:'JP',platform:'Instagram',month:'2026年3月',views:113081,spend:600.00,cpm:5.3100},
+  {name:'3Dプリンター副業リーマン',region:'JP',platform:'Instagram',month:'2026年3月',views:97802,spend:220.00,cpm:2.2500},
   {name:'98hobby',region:'JP',platform:'YouTube Shorts',month:'2026年3月',views:1648896,spend:300.00,cpm:0.1800},
-  {name:'Laye | 3D print',region:'JP',platform:'Instagram',month:'2026年3月',views:467973,spend:300.00,cpm:0.6400},
+  {name:'Laye | 3D print',region:'JP',platform:'Instagram',month:'2026年3月',views:467973,spend:1200.00,cpm:2.5641},
   {name:'mAIsami｜想いを形にするブランドタグ',region:'JP',platform:'Instagram',month:'2026年3月',views:281594,spend:400.00,cpm:1.4200},
   {name:'nookle_lab',region:'JP',platform:'Instagram',month:'2026年3月',views:502142,spend:0.00,cpm:0.0000},
   {name:'おか｜残業がなくなるExcel時短術',region:'JP',platform:'Instagram',month:'2026年3月',views:25198,spend:250.00,cpm:9.9200},
@@ -3077,7 +3355,6 @@ const KOL_TABLE=[
   {name:'ものこと⌇ガジェットに囲まれた暮らし',region:'JP',platform:'Instagram',month:'2026年3月',views:21230,spend:280.00,cpm:13.1900},
   {name:'りくらぼ / RikuLab',region:'JP',platform:'YouTube Shorts',month:'2026年3月',views:5697780,spend:2400.00,cpm:0.4200},
   {name:'アキラ@Lurecafe管理人',region:'JP',platform:'Instagram',month:'2026年3月',views:23705,spend:0.00,cpm:0.0000},
-  {name:'クリプトハスキー',region:'JP',platform:'YouTube Long',month:'2026年3月',views:89761,spend:233.34,cpm:2.6000},
   {name:'テックちゃん | 3Dプリンターの実験室',region:'JP',platform:'TikTok',month:'2026年3月',views:5294,spend:0.00,cpm:0.0000},
   {name:'ハズム',region:'JP',platform:'Instagram',month:'2026年3月',views:304311,spend:2200.00,cpm:7.2300},
   {name:'ミコンスキー🦊',region:'JP',platform:'Twitter/X',month:'2026年3月',views:201864,spend:0.00,cpm:0.0000},
@@ -3104,7 +3381,6 @@ const KOL_TABLE=[
   {name:'りくらぼ / RikuLab',region:'JP',platform:'YouTube Shorts',month:'2026年2月',views:3245678,spend:2400.00,cpm:0.7400},
   {name:'エクセルお姉さん -簡単Excel術・仕事術・スキル-',region:'JP',platform:'Instagram',month:'2026年2月',views:258904,spend:1276.12,cpm:4.9300},
   {name:'カイ -KAI-',region:'JP',platform:'Instagram',month:'2026年2月',views:19286,spend:57.31,cpm:2.9700},
-  {name:'クリプトハスキー',region:'JP',platform:'YouTube Long',month:'2026年2月',views:47484,spend:233.33,cpm:4.9100},
   {name:'デコスケチャンネル',region:'JP',platform:'YouTube Shorts',month:'2026年2月',views:1921,spend:21.37,cpm:11.1200},
   {name:'創造のむこう',region:'JP',platform:'YouTube Long',month:'2026年2月',views:88,spend:0.00,cpm:0.0000},
   {name:'松子',region:'JP',platform:'Twitter/X',month:'2026年2月',views:1564,spend:400.00,cpm:255.7500},
@@ -3126,7 +3402,6 @@ const KOL_TABLE=[
   {name:'もりた | ３Dでハンドメイド素材制作',region:'JP',platform:'Instagram',month:'2026年1月',views:3326,spend:0.00,cpm:0.0000},
   {name:'りくらぼ / RikuLab',region:'JP',platform:'YouTube Shorts',month:'2026年1月',views:5824645,spend:2400.00,cpm:0.4100},
   {name:'りゅーや｜今日から真似できる暮らし術',region:'JP',platform:'Instagram',month:'2026年1月',views:18914,spend:66.37,cpm:3.5100},
-  {name:'クリプトハスキー',region:'JP',platform:'YouTube Long',month:'2026年1月',views:62762,spend:600.00,cpm:9.5600},
   {name:'テックちゃん | 3Dプリンターの実験室',region:'JP',platform:'TikTok',month:'2026年1月',views:27841,spend:0.00,cpm:0.0000},
   {name:'高校生の電子工作日記',region:'JP',platform:'Twitter/X',month:'2026年1月',views:125445,spend:154.74,cpm:1.2300},
   {name:'𝕞𝕒𝕞𝕒𝕔𝕒✿3Dワークショップ講師',region:'JP',platform:'Instagram',month:'2026年1月',views:27211,spend:70.45,cpm:2.5900},
@@ -3307,6 +3582,9 @@ function setLang(l){
   lang=l;
   document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',(l==='en'&&b.textContent==='EN')||(l==='zh'&&b.textContent==='中文')));
   document.querySelectorAll('[data-en]').forEach(el=>{const t=l==='zh'?el.getAttribute('data-zh'):el.getAttribute('data-en');if(t)el.textContent=t;});
+  // Re-render dynamic sections so lang-aware JS templates update
+  const casesPage=document.getElementById('page-cases');
+  if(casesPage&&casesPage.classList.contains('active')){renderOrganic();renderAds();}
 }
 
 function showPage(id,btn){
@@ -3538,20 +3816,20 @@ function renderOrganic(){
     const isPaid=AD_NAMES_SET.has(c.name);
     const bc=BREAKOUT_CASES.find(b=>b.url&&c.url&&b.url===c.url)||BREAKOUT_CASES.find(b=>b.name===c.name&&b.platform===c.platform&&(b.month===(c.date||c.month)))||BREAKOUT_CASES.find(b=>b.name===c.name&&b.platform===c.platform)||{};
     const _rawDate=c.date||c.month||bc.publishDate||'';
-    const displayDate=(()=>{const MNAMES=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];const m1=_rawDate.match(/(\d{4})年0*(\d+)月/);if(m1)return MNAMES[parseInt(m1[2])-1]+' '+m1[1];const m2=_rawDate.match(/(\d{4})-(\d{2})/);if(m2)return MNAMES[parseInt(m2[2])-1]+' '+m2[1];return _rawDate;})();
+    const displayDate=(()=>{const MNAMES=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];const m1=_rawDate.match(/(\d{4})年0*(\d+)月/);if(m1)return lang==='zh'?m1[1]+'年'+m1[2]+'月':MNAMES[parseInt(m1[2])-1]+' '+m1[1];const m2=_rawDate.match(/(\d{4})-(\d{2})/);if(m2)return lang==='zh'?m2[1]+'年'+parseInt(m2[2])+'月':MNAMES[parseInt(m2[2])-1]+' '+m2[1];return _rawDate;})();
     const displayCat=c.catSub||c.cat||'';
     return`<div class="oc2" onclick="openOrgModal(${idx})">
       <div class="oc2-top">
         <div class="oc2-tags">
           <span class="oc2-cat" style="background:${bg};color:${col}">${displayCat}</span>
           <span class="oc2-plat ${platCls(c.platform)}">${c.platform}</span>
-          ${isPaid?`<span class="oc2-plat" style="background:var(--amber-bg);color:var(--amber)">Paid Ad ✓</span>`:''}
+          ${isPaid?`<span class="oc2-plat" style="background:var(--amber-bg);color:var(--amber)">${lang==='zh'?'付費廣告 ✓':'Paid Ad ✓'}</span>`:''}
         </div>
         <div class="oc2-name">${c.name}</div>
         <div class="oc2-date">${displayDate}</div>
       </div>
       <div class="oc2-stats">
-        <div class="os2"><div class="os2-n">${c.viewsFmt}</div><div class="os2-l">Views</div></div>
+        <div class="os2"><div class="os2-n">${c.viewsFmt}</div><div class="os2-l">${lang==='zh'?'觀看量':'Views'}</div></div>
         <div class="os2"><div class="os2-n" style="${cpmColor?'color:'+cpmColor:''}">${c.cpm>0?'$'+c.cpm.toFixed(2):'—'}</div><div class="os2-l">CPM</div></div>
       </div>
     </div>`;
@@ -3572,10 +3850,10 @@ function renderAds(){
 
   // toolbar: sort
   container.innerHTML=
-    `<div class="ad-toolbar-row"><span class="ad-sort-label">Sort:</span>`+
+    `<div class="ad-toolbar-row"><span class="ad-sort-label">${lang==='zh'?'排序：':'Sort:'}</span>`+
     SORT_OPTS.map(o=>`<button class="ad-sort-btn${_adSort===o.k?' active':''}" onclick="setAdSort('${o.k}')">${o.l}</button>`).join('')+
     `</div>`+
-    `<div class="ad-toolbar-row"><span class="ad-sort-label">Region:</span>`+
+    `<div class="ad-toolbar-row"><span class="ad-sort-label">${lang==='zh'?'語區：':'Region:'}</span>`+
     REGION_ORDER.map(r=>{
       const cnt=r==='ALL'?AD_CASES_FULL.filter(c=>!['TR','PT'].includes(c.region)).length:AD_CASES_FULL.filter(c=>c.region===r).length;
       if(r!=='ALL'&&!cnt)return'';
@@ -3672,7 +3950,7 @@ function buildKwPills(str){
 function setThumb(c){
   const url=c.url||'';
   if(url){
-    document.getElementById('modal-thumb').innerHTML=`<a href="${url}" target="_blank" style="display:flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none;"><span style="font-size:22px;">▶</span><span style="font-size:12px;color:var(--accent);font-family:var(--mono);">View on ${c.platform} ↗</span></a>`;
+    document.getElementById('modal-thumb').innerHTML=`<a href="${url}" target="_blank" style="display:flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none;"><span style="font-size:22px;">▶</span><span style="font-size:12px;color:var(--accent);font-family:var(--mono);">${lang==='zh'?'前往觀看 ↗':'View on '+c.platform+' ↗'}</span></a>`;
   } else {
     document.getElementById('modal-thumb').innerHTML='<span style="font-size:11px;color:var(--text3);font-family:var(--mono)">Video link not available</span>';
   }
@@ -3688,14 +3966,14 @@ function openOrgModal(i){
   const nameHtml=c.url?`<a class="modal-kol-link" href="${c.url}" target="_blank">${c.name} ↗</a>`:c.name;
   document.getElementById('modal-tags').innerHTML=`<span class="badge badge-${reg}">${reg}</span><span class="badge" style="background:var(--bg3);color:var(--text2)">${plat}</span>${catLabel?`<span class="badge" style="background:var(--accent-bg);color:var(--accent)">${catLabel}</span>`:''}`;
   document.getElementById('modal-title').innerHTML=nameHtml;
-  document.getElementById('modal-date').textContent=(c.date||c.month||'—')+'  ·  Organic Breakout';
+  document.getElementById('modal-date').textContent=(c.date||c.month||'—')+(lang==='zh'?'  ·  自然爆款':'  ·  Organic Breakout');
   const cpmVal=c.cpm>0?'$'+c.cpm.toFixed(2):'—';
   const cpmColor=c.cpm>0&&c.cpm<2?'#1D9E75':c.cpm>=10?'#c0392b':'';
   document.getElementById('modal-mets').innerHTML=[
-    {n:fmtV(c.views),l:'Views'},
+    {n:c.viewsFmt||fmtV(c.views),l:lang==='zh'?'觀看量':'Views'},
     {n:cpmVal,l:'CPM',col:cpmColor},
-    {n:c.spend>0?'$'+c.spend.toLocaleString():'—',l:'Spend'},
-    {n:reg,l:'Region'}
+    {n:c.spend>0?'$'+c.spend.toLocaleString():'—',l:lang==='zh'?'花費':'Spend'},
+    {n:reg,l:lang==='zh'?'語區':'Region'}
   ].map(m=>`<div class="mm"><div class="mm-n" style="${m.col?'color:'+m.col:''}">${m.n}</div><div class="mm-l">${m.l}</div></div>`).join('');
   // Structure anatomy
   document.getElementById('modal-structure-block').innerHTML=`
@@ -3725,7 +4003,7 @@ function openOrgModal(i){
   document.getElementById('modal-reuse-block').innerHTML=`
     <div class="lstep"><div class="lnum">→</div><div><div class="lt">可複用結構公式</div><div class="lb">${c.reusableFormula||c.reuse||(c.viral_formula||'—')}</div></div></div>
     ${c.brandAdaptation?`<div class="lstep"><div class="lnum">→</div><div><div class="lt">品牌改編建議</div><div class="lb">${c.brandAdaptation}</div></div></div>`:''}
-    <div class="lstep"><div class="lnum">→</div><div><div class="lt">下一條建議</div><div class="lb">${(c.reuse||'').split('。').slice(1).join('。')||c.ctaContent||'—'}</div></div></div>`;
+    <div class="lstep"><div class="lnum">→</div><div><div class="lt">CTA內容</div><div class="lb">${c.ctaContent||(c.reuse||'').split('。').slice(1).join('。')||'—'}</div></div></div>`;
   const summaryText=c.verdict||c.summary||'—';
   document.getElementById('modal-verdict').textContent=summaryText;
   // Scores block
@@ -3749,9 +4027,9 @@ function openOrgModal(i){
 function openAdModal(i){
   const c=AD_CASES_FULL[i]||AD_CASES[i];
   const nameHtml=c.url?`<a class="modal-kol-link" href="${c.url}" target="_blank">${c.name} ↗</a>`:c.name;
-  document.getElementById('modal-tags').innerHTML=`<span class="badge badge-${c.region}">${c.region}</span><span class="badge" style="background:var(--bg3);color:var(--text2)">${c.platform}</span><span class="badge" style="background:var(--amber-bg);color:var(--amber)">Paid Ad</span>`;
+  document.getElementById('modal-tags').innerHTML=`<span class="badge badge-${c.region}">${c.region}</span><span class="badge" style="background:var(--bg3);color:var(--text2)">${c.platform}</span><span class="badge" style="background:var(--amber-bg);color:var(--amber)">${lang==='zh'?'付費廣告':'Paid Ad'}</span>`;
   document.getElementById('modal-title').innerHTML=nameHtml;
-  document.getElementById('modal-date').textContent=(c.date||'—')+'  ·  Ad Conversion Campaign';
+  document.getElementById('modal-date').textContent=(c.date||'—')+(lang==='zh'?'  ·  廣告投放':'  ·  Ad Conversion Campaign');
   document.getElementById('modal-mets').innerHTML=[
     {n:String(c.results),l:'Results',col:'#185FA5'},
     {n:'$'+c.cpa.toFixed(2),l:'CPA'},
